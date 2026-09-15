@@ -20,7 +20,8 @@
 
 **Link dùng thử:**
 
-> URL: CLI interactive session qua `python chat.py --provider gemini --version v3`
+> 1. **Giao diện Web UI Demo:** Chạy lệnh `python web_ui.py --port 8080 --provider gemini --version v3`, sau đó mở trình duyệt tại `http://localhost:8080` (hiển thị đầy đủ tool calls, input/output JSON, phân tích giá ảo Bonus Tool, và tải transcript trực tiếp).
+> 2. **Giao diện dòng lệnh (CLI):** Chạy `python chat.py --provider gemini --version v3`.
 
 ## A2. Tool agent có
 
