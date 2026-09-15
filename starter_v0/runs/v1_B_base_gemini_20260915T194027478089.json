@@ -1,0 +1,2458 @@
+{
+  "run_id": "v1_B_base_gemini_20260915T194027478089",
+  "version": "v1",
+  "artifact_version": "v1+pcd69dce95a4d+tb45dd66e1366",
+  "prompt_hash": "cd69dce95a4d8a83041e7affbc83e6d8c55aa6f06f46e59197e9923fbb058622",
+  "tools_hash": "b45dd66e1366e3b24ec648dd77ae13661c051b1c08d00aa64a107e7976098fa1",
+  "phase": "B",
+  "suite": "base",
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-lite",
+  "system_prompt": "/Users/duy/Downloads/K4-L3B-Day04-NGUYENKHANHDUY2A202602403-main/K4-L3-DAY04-NguyenKhanhDuy-2A202602403-PromptEngineeringToolCalling/starter_v0/artifacts/system_prompt.md",
+  "tools": "/Users/duy/Downloads/K4-L3B-Day04-NGUYENKHANHDUY2A202602403-main/K4-L3-DAY04-NguyenKhanhDuy-2A202602403-PromptEngineeringToolCalling/starter_v0/artifacts/tools.yaml",
+  "eval_cases": "data/eval_deal_base.json",
+  "dataset_id": "day04_deal_base",
+  "dataset_role": "base",
+  "description": "Fixed core evaluation for DealHunter AI Assistant. Includes 20 single-turn cases and 10 multi-turn cases.",
+  "generated_at": "2026-09-15T19:40:27",
+  "summary": {
+    "total_cases": 30,
+    "measured_cases": 30,
+    "provider_error_cases": 0,
+    "passed_cases": 20,
+    "case_accuracy": 0.6667,
+    "tool_routing_accuracy": 0.7333,
+    "argument_accuracy": 0.6667,
+    "multiturn_accuracy": 0.5,
+    "failure_counts": {
+      "wrong_tool": 5,
+      "missing_info": 1,
+      "wrong_arg_value": 1,
+      "wrong_boundary": 3
+    },
+    "observed_mismatch_counts": {
+      "wrong_arg_value": 2,
+      "missing_tool_call": 8
+    }
+  },
+  "results": [
+    {
+      "id": "D01_platform_price_routing",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_single_platform",
+        "difficulty": "easy",
+        "what_it_tests": "Tra cứu giá trên một sàn cụ thể phải dùng query_platform_price."
+      },
+      "input": "Giá iPhone 15 Pro trên Shopee hiện tại là bao nhiêu?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "shopee",
+              "product_name": "iPhone 15 Pro"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "product_name": "iPhone 15 Pro",
+              "platform": "shopee"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "query_platform_price",
+          "args": {
+            "product_name": "iPhone 15 Pro",
+            "platform": "shopee"
+          },
+          "result": {
+            "tool": "query_platform_price",
+            "platform": "shopee",
+            "product_name": "iPhone 15 Pro",
+            "variant": "",
+            "matches": [
+              {
+                "product_id": "PROD-IP15P",
+                "product_name": "Apple iPhone 15 Pro",
+                "platform": "shopee",
+                "variant": "128GB",
+                "listed_price": 28990000,
+                "discount_price": 24490000,
+                "voucher_discount": 500000,
+                "final_effective_price": 23990000,
+                "shipping_fee": 30000,
+                "seller_name": "Apple Flagship Store Shopee",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              },
+              {
+                "product_id": "PROD-IP15P",
+                "product_name": "Apple iPhone 15 Pro",
+                "platform": "shopee",
+                "variant": "256GB",
+                "listed_price": 31990000,
+                "discount_price": 27890000,
+                "voucher_discount": 600000,
+                "final_effective_price": 27290000,
+                "shipping_fee": 30000,
+                "seller_name": "Apple Flagship Store Shopee",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ],
+            "count": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "D02_multi_platform_comparison",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_multi_platform_comparison",
+        "difficulty": "easy",
+        "what_it_tests": "Tìm giá rẻ nhất hoặc so sánh đa sàn dùng compare_multi_platform_prices."
+      },
+      "input": "So sánh giá MacBook Air M3 trên các sàn và cho mình biết nơi nào bán rẻ nhất.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "MacBook Air M3"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "MacBook Air M3"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "compare_multi_platform_prices",
+          "args": {
+            "product_name": "MacBook Air M3"
+          },
+          "result": {
+            "tool": "compare_multi_platform_prices",
+            "product_name": "MacBook Air M3",
+            "variant": "",
+            "error": "no_offers_found",
+            "message": "Không tìm thấy ưu đãi nào cho MacBook Air M3 trên các sàn được chọn."
+          }
+        }
+      ]
+    },
+    {
+      "id": "D03_catalog_specs_routing",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_catalog",
+        "difficulty": "medium",
+        "what_it_tests": "Yêu cầu thông số kỹ thuật dùng search_product_catalog."
+      },
+      "input": "Tìm thông số kỹ thuật và độ phân giải của màn hình Dell UltraSharp U2723QE.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_product_catalog",
+            "args": {
+              "query": "Dell UltraSharp U2723QE",
+              "category": "monitor"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_product_catalog",
+            "args": {
+              "category": "monitor",
+              "query": "Dell UltraSharp U2723QE"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_product_catalog",
+          "args": {
+            "category": "monitor",
+            "query": "Dell UltraSharp U2723QE"
+          },
+          "result": {
+            "tool": "search_product_catalog",
+            "query": "Dell UltraSharp U2723QE",
+            "category": "monitor",
+            "total_matches": 1,
+            "products": [
+              {
+                "product_id": "PROD-DEL-U2723",
+                "name": "Dell UltraSharp U2723QE 27 inch 4K",
+                "brand": "Dell",
+                "category": "monitor",
+                "msrp": 14500000,
+                "variants": [
+                  "27-inch 4K"
+                ],
+                "colors": [
+                  "Platinum Silver"
+                ],
+                "release_year": 2022,
+                "specs": "Tấm nền IPS Black, Độ phân giải 3840x2160 4K, 100% sRGB, 98% DCI-P3, USB-C Hub 90W PD, Cổng RJ45 LAN"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "D04_user_profile_routing",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_user_profile",
+        "difficulty": "easy",
+        "what_it_tests": "Mã khách hàng phải đi vào lookup_user_profile."
+      },
+      "input": "Tra cứu thông tin tài khoản khách hàng USER-101 và các voucher hiện có.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup_user_profile",
+            "args": {
+              "user_id": "USER-101"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup_user_profile",
+            "args": {
+              "user_id": "USER-101"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup_user_profile",
+          "args": {
+            "user_id": "USER-101"
+          },
+          "result": {
+            "tool": "lookup_user_profile",
+            "user_id": "USER-101",
+            "profile": {
+              "user_id": "USER-101",
+              "full_name": "Nguyen Van An",
+              "tier": "diamond",
+              "shipping_city": "Ha Noi",
+              "freeship_eligible": true,
+              "saved_vouchers": [
+                "VCH-500K-TECH",
+                "VCH-FREESHIP-MAX"
+              ],
+              "active_alerts": [
+                "PROD-IP15P",
+                "PROD-MBA-M3"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "D05_platform_variant_arg",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "extract_variant_arg",
+        "difficulty": "medium",
+        "what_it_tests": "Trích đúng platform=tiki và variant=256GB."
+      },
+      "input": "Kiểm tra giá bản iPhone 15 Pro 256GB trên Tiki.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "tiki",
+              "product_name": "iPhone 15 Pro",
+              "variant": "256GB"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "product_name": "iPhone 15 Pro",
+              "platform": "tiki",
+              "variant": "256GB"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "query_platform_price",
+          "args": {
+            "product_name": "iPhone 15 Pro",
+            "platform": "tiki",
+            "variant": "256GB"
+          },
+          "result": {
+            "tool": "query_platform_price",
+            "platform": "tiki",
+            "product_name": "iPhone 15 Pro",
+            "variant": "256GB",
+            "matches": [
+              {
+                "product_id": "PROD-IP15P",
+                "product_name": "Apple iPhone 15 Pro",
+                "platform": "tiki",
+                "variant": "256GB",
+                "listed_price": 31990000,
+                "discount_price": 27490000,
+                "voucher_discount": 700000,
+                "final_effective_price": 26790000,
+                "shipping_fee": 0,
+                "seller_name": "Tiki Trading Official",
+                "seller_rating": 4.8,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ],
+            "count": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "D06_cellphones_routing",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "cellphones_platform_arg",
+        "difficulty": "medium",
+        "what_it_tests": "Nhận diện đúng platform=cellphones."
+      },
+      "input": "Xem giá Galaxy S24 Ultra tại hệ thống CellphoneS.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "cellphones",
+              "product_name": "Galaxy S24 Ultra"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "cellphones",
+              "product_name": "Galaxy S24 Ultra"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "query_platform_price",
+          "args": {
+            "platform": "cellphones",
+            "product_name": "Galaxy S24 Ultra"
+          },
+          "result": {
+            "tool": "query_platform_price",
+            "platform": "cellphones",
+            "product_name": "Galaxy S24 Ultra",
+            "variant": "",
+            "matches": [
+              {
+                "product_id": "PROD-S24U",
+                "product_name": "Samsung Galaxy S24 Ultra",
+                "platform": "cellphones",
+                "variant": "256GB",
+                "listed_price": 31990000,
+                "discount_price": 26490000,
+                "voucher_discount": 500000,
+                "final_effective_price": 25990000,
+                "shipping_fee": 0,
+                "seller_name": "CellphoneS Store",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ],
+            "count": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "D07_format_ranking_report",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "format_existing_prices",
+        "difficulty": "medium",
+        "what_it_tests": "Đã có findings thì chỉ format ranking, không gọi tool quét giá lại."
+      },
+      "input": "Trình bày các mức giá đã tìm được thành bảng xếp hạng giá từ thấp đến cao tên 'Bảng Giá iPhone 15 Pro': Shopee 23990000; Tiki 24190000; CellphoneS 24690000.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "format_price_comparison",
+            "args": {
+              "template": "ranking",
+              "comparison_title": "Bảng Giá iPhone 15 Pro"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "format_price_comparison",
+            "args": {
+              "findings": [
+                {
+                  "platform": "Shopee",
+                  "price": 23990000
+                },
+                {
+                  "price": 24190000,
+                  "platform": "Tiki"
+                },
+                {
+                  "platform": "CellphoneS",
+                  "price": 24690000
+                }
+              ],
+              "template": "ranking",
+              "comparison_title": "Bảng Giá iPhone 15 Pro"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "format_price_comparison",
+          "args": {
+            "findings": [
+              {
+                "platform": "Shopee",
+                "price": 23990000
+              },
+              {
+                "price": 24190000,
+                "platform": "Tiki"
+              },
+              {
+                "platform": "CellphoneS",
+                "price": 24690000
+              }
+            ],
+            "template": "ranking",
+            "comparison_title": "Bảng Giá iPhone 15 Pro"
+          },
+          "result": {
+            "tool": "format_price_comparison",
+            "template": "ranking",
+            "comparison_title": "Bảng Giá iPhone 15 Pro",
+            "items_count": 3,
+            "formatted_report": "# Bảng Giá iPhone 15 Pro\nMẫu hiển thị: ranking\n\n## Xếp hạng giá từ thấp đến cao:\n1. SHOPEE: 23,990,000 VNĐ\n2. TIKI: 24,190,000 VNĐ\n3. CELLPHONES: 24,690,000 VNĐ"
+          }
+        }
+      ]
+    },
+    {
+      "id": "D08_out_of_scope",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu ngoài săn giá TMĐT phải từ chối không gọi tool."
+      },
+      "input": "Hướng dẫn mình cách nấu món bún bò Huế thơm ngon chuẩn vị.",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "{\n  \"intent\": \"cooking_instruction\",\n  \"action\": \"none\",\n  \"reply\": \"Chào bạn, mình là DealHunter AI, chuyên gia hỗ trợ so sánh giá và tìm kiếm ưu đãi trên các sàn thương mại điện tử. Rất tiếc, mình không có chuyên môn về hướng dẫn nấu ăn. Bạn có thể tìm kiếm công thức nấu bún bò Huế trên các trang web chuyên về ẩm thực hoặc YouTube để có hướng dẫn chi tiết nhất nhé. Nếu bạn cần mua các dụng cụ nhà bếp như nồi áp suất, bếp từ hay các nguyên liệu khô, mình rất sẵn lòng giúp bạn so sánh giá để mua được với chi phí tốt nhất!\",\n  \"evidence_ids\": []\n}",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "D09_platform_policy_routing",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_policy",
+        "difficulty": "medium",
+        "what_it_tests": "Tra cứu chính sách bảo vệ giá phải gọi platform_policy."
+      },
+      "input": "Tìm hiểu chính sách cam kết giá rẻ và bù tiền chênh lệch khi mua sắm.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "platform_policy",
+            "args": {
+              "query": "bù chênh lệch",
+              "policy_area": "price_protection"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": true,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "platform_policy",
+            "args": {
+              "policy_area": "price_protection",
+              "query": "chính sách cam kết giá rẻ và bù tiền chênh lệch"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "wrong_arg_value",
+        "failure_type": "wrong_tool",
+        "failures": [
+          "query: expected 'bù chênh lệch', got 'chính sách cam kết giá rẻ và bù tiền chênh lệch'"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "platform_policy",
+          "args": {
+            "policy_area": "price_protection",
+            "query": "chính sách cam kết giá rẻ và bù tiền chênh lệch"
+          },
+          "result": {
+            "tool": "platform_policy",
+            "query": "chính sách cam kết giá rẻ và bù tiền chênh lệch",
+            "policy_area": "price_protection",
+            "total_matches": 1,
+            "policies": [
+              {
+                "policy_area": "price_protection",
+                "title": "Chính sách Cam kết Giá Rẻ & Bù Chênh Lệch",
+                "content": "Nếu người dùng phát hiện sản phẩm cùng model, cùng tình trạng phân phối chính hãng rẻ hơn trên sàn khác trong vòng 7 ngày kể từ khi mua, sàn sẽ hoàn lại 100% phần tiền chênh lệch vào ví điểm thưởng.",
+                "conditions": "Áp dụng cho các shop chính hãng (Mall/Official/Trading). Không áp dụng cho hàng đã qua sử dụng, hàng nhập khẩu tiểu ngạch hoặc flash sale giới hạn số lượng dưới 10 chiếc."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "D10_external_market_price",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_external_search",
+        "difficulty": "medium",
+        "what_it_tests": "Giá niêm yết hãng trên web phải dùng search_external_market_price."
+      },
+      "input": "Tìm giá niêm yết quốc tế tham chiếu từ hãng Sony cho model WH-1000XM5.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_external_market_price",
+            "args": {
+              "manufacturer": "Sony",
+              "model": "WH-1000XM5"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_external_market_price",
+            "args": {
+              "manufacturer": "Sony",
+              "query_type": "price",
+              "model": "WH-1000XM5"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_external_market_price",
+          "args": {
+            "manufacturer": "Sony",
+            "query_type": "price",
+            "model": "WH-1000XM5"
+          },
+          "result": {
+            "tool": "search_external_market_price",
+            "manufacturer": "Sony",
+            "model": "WH-1000XM5",
+            "query_type": "price",
+            "source": "mock_market_feed",
+            "reference_info": {
+              "global_msrp_usd": 399,
+              "vietnam_suggested_retail_price": "8.490.000 VNĐ",
+              "official_warranty": "12 tháng tại các trung tâm bảo hành ủy quyền"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "D11_price_alert_unconfirmed",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "alert_confirmation_boundary",
+        "difficulty": "hard",
+        "what_it_tests": "Đặt alert ghi dữ liệu phải dừng ở confirmation boundary (hỏi lại xác nhận)."
+      },
+      "input": "Đặt thông báo cho tôi khi MacBook Air M3 giảm xuống dưới 23000000 VNĐ.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no",
+              "question": "Bạn có chắc chắn muốn đặt thông báo theo dõi giá cho sản phẩm MacBook Air M3 với mức giá mục tiêu là 23.000.000 VNĐ không?"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "response_type": "yes_no",
+            "question": "Bạn có chắc chắn muốn đặt thông báo theo dõi giá cho sản phẩm MacBook Air M3 với mức giá mục tiêu là 23.000.000 VNĐ không?"
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Bạn có chắc chắn muốn đặt thông báo theo dõi giá cho sản phẩm MacBook Air M3 với mức giá mục tiêu là 23.000.000 VNĐ không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "D12_alert_unconfirmed_ipad",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "alert_needs_confirmation",
+        "difficulty": "hard",
+        "what_it_tests": "Chưa có confirmed=true từ người dùng thì phải hỏi xác nhận."
+      },
+      "input": "Tạo alert giá iPad Air M2 mức 14000000.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no",
+              "question": "Bạn có chắc chắn muốn tạo thông báo theo dõi giá cho sản phẩm iPad Air M2 với mức giá mục tiêu là 14.000.000 VNĐ không?"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "response_type": "yes_no",
+            "question": "Bạn có chắc chắn muốn tạo thông báo theo dõi giá cho sản phẩm iPad Air M2 với mức giá mục tiêu là 14.000.000 VNĐ không?"
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Bạn có chắc chắn muốn tạo thông báo theo dõi giá cho sản phẩm iPad Air M2 với mức giá mục tiêu là 14.000.000 VNĐ không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "D13_clarify_missing_variant",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_product_variant",
+        "difficulty": "medium",
+        "what_it_tests": "iPad có nhiều phiên bản bộ nhớ nên phải hỏi phân loại cụ thể."
+      },
+      "input": "Tìm giá iPad Air M2 rẻ nhất hiện nay.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "choice",
+              "options": [
+                "128GB Wi-Fi",
+                "256GB Wi-Fi"
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "iPad Air M2"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "missing_info",
+        "failures": [
+          "missing tool call clarify",
+          "extra tool call compare_multi_platform_prices"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "compare_multi_platform_prices",
+          "args": {
+            "product_name": "iPad Air M2"
+          },
+          "result": {
+            "tool": "compare_multi_platform_prices",
+            "product_name": "iPad Air M2",
+            "variant": "",
+            "error": "no_offers_found",
+            "message": "Không tìm thấy ưu đãi nào cho iPad Air M2 trên các sàn được chọn."
+          }
+        }
+      ]
+    },
+    {
+      "id": "D14_format_detailed_report",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "format_detailed_comparison",
+        "difficulty": "medium",
+        "what_it_tests": "Format báo cáo chi tiết dùng template detailed."
+      },
+      "input": "Trình bày chi tiết các ưu đãi của Sony WH-1000XM5 gồm giá, voucher và phí ship thành báo cáo chi tiết tên 'Báo Giá Sony XM5'.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "format_price_comparison",
+            "args": {
+              "template": "detailed",
+              "comparison_title": "Báo Giá Sony XM5"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "Sony WH-1000XM5"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_arg_value",
+        "failures": [
+          "missing tool call format_price_comparison",
+          "extra tool call compare_multi_platform_prices"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "compare_multi_platform_prices",
+          "args": {
+            "product_name": "Sony WH-1000XM5"
+          },
+          "result": {
+            "tool": "compare_multi_platform_prices",
+            "product_name": "Sony WH-1000XM5",
+            "variant": "",
+            "offers_compared": 2,
+            "best_deal": {
+              "platform": "shopee",
+              "seller": "Sony Official Store Shopee",
+              "final_price": 6190000,
+              "original_discount_price": 6490000,
+              "voucher_discount": 300000,
+              "shipping_fee": 25000
+            },
+            "all_ranked_offers": [
+              {
+                "product_id": "PROD-SNY-XM5",
+                "product_name": "Sony WH-1000XM5 Wireless Headphones",
+                "platform": "shopee",
+                "variant": "Standard",
+                "listed_price": 8490000,
+                "discount_price": 6490000,
+                "voucher_discount": 300000,
+                "final_effective_price": 6190000,
+                "shipping_fee": 25000,
+                "seller_name": "Sony Official Store Shopee",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              },
+              {
+                "product_id": "PROD-SNY-XM5",
+                "product_name": "Sony WH-1000XM5 Wireless Headphones",
+                "platform": "tiki",
+                "variant": "Standard",
+                "listed_price": 8490000,
+                "discount_price": 6690000,
+                "voucher_discount": 400000,
+                "final_effective_price": 6290000,
+                "shipping_fee": 0,
+                "seller_name": "Tiki Trading",
+                "seller_rating": 4.8,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "D15_compare_two_platforms_parallel",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "duplicate_tool_parallel",
+        "difficulty": "hard",
+        "what_it_tests": "So sánh 2 sàn cụ thể phải kích hoạt 2 calls song song với args tương ứng."
+      },
+      "input": "So sánh giá iPhone 15 Pro trên cả Shopee và Tiki, đừng bỏ sót sàn nào.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "shopee",
+              "product_name": "iPhone 15 Pro"
+            }
+          },
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "tiki",
+              "product_name": "iPhone 15 Pro"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "platforms": [
+                "shopee",
+                "tiki"
+              ],
+              "product_name": "iPhone 15 Pro"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_tool",
+        "failures": [
+          "missing tool call query_platform_price",
+          "missing tool call query_platform_price",
+          "extra tool call compare_multi_platform_prices"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "compare_multi_platform_prices",
+          "args": {
+            "platforms": [
+              "shopee",
+              "tiki"
+            ],
+            "product_name": "iPhone 15 Pro"
+          },
+          "result": {
+            "tool": "compare_multi_platform_prices",
+            "product_name": "iPhone 15 Pro",
+            "variant": "",
+            "offers_compared": 4,
+            "best_deal": {
+              "platform": "shopee",
+              "seller": "Apple Flagship Store Shopee",
+              "final_price": 23990000,
+              "original_discount_price": 24490000,
+              "voucher_discount": 500000,
+              "shipping_fee": 30000
+            },
+            "all_ranked_offers": [
+              {
+                "product_id": "PROD-IP15P",
+                "product_name": "Apple iPhone 15 Pro",
+                "platform": "shopee",
+                "variant": "128GB",
+                "listed_price": 28990000,
+                "discount_price": 24490000,
+                "voucher_discount": 500000,
+                "final_effective_price": 23990000,
+                "shipping_fee": 30000,
+                "seller_name": "Apple Flagship Store Shopee",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              },
+              {
+                "product_id": "PROD-IP15P",
+                "product_name": "Apple iPhone 15 Pro",
+                "platform": "tiki",
+                "variant": "128GB",
+                "listed_price": 28990000,
+                "discount_price": 24990000,
+                "voucher_discount": 800000,
+                "final_effective_price": 24190000,
+                "shipping_fee": 0,
+                "seller_name": "Tiki Trading Official",
+                "seller_rating": 4.8,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              },
+              {
+                "product_id": "PROD-IP15P",
+                "product_name": "Apple iPhone 15 Pro",
+                "platform": "tiki",
+                "variant": "256GB",
+                "listed_price": 31990000,
+                "discount_price": 27490000,
+                "voucher_discount": 700000,
+                "final_effective_price": 26790000,
+                "shipping_fee": 0,
+                "seller_name": "Tiki Trading Official",
+                "seller_rating": 4.8,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              },
+              {
+                "product_id": "PROD-IP15P",
+                "product_name": "Apple iPhone 15 Pro",
+                "platform": "shopee",
+                "variant": "256GB",
+                "listed_price": 31990000,
+                "discount_price": 27890000,
+                "voucher_discount": 600000,
+                "final_effective_price": 27290000,
+                "shipping_fee": 30000,
+                "seller_name": "Apple Flagship Store Shopee",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "D16_compare_two_products",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "multiple_products_parallel",
+        "difficulty": "hard",
+        "what_it_tests": "Không gộp hai sản phẩm vào một lệnh; phải gọi 2 lần riêng biệt."
+      },
+      "input": "Tìm deal giá tốt nhất cho cả tai nghe Sony WH-1000XM5 và tai nghe Apple AirPods Pro 2.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "Sony WH-1000XM5"
+            }
+          },
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "Apple AirPods Pro 2"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "Sony WH-1000XM5"
+            }
+          },
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "Apple AirPods Pro 2"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "compare_multi_platform_prices",
+          "args": {
+            "product_name": "Sony WH-1000XM5"
+          },
+          "result": {
+            "tool": "compare_multi_platform_prices",
+            "product_name": "Sony WH-1000XM5",
+            "variant": "",
+            "offers_compared": 2,
+            "best_deal": {
+              "platform": "shopee",
+              "seller": "Sony Official Store Shopee",
+              "final_price": 6190000,
+              "original_discount_price": 6490000,
+              "voucher_discount": 300000,
+              "shipping_fee": 25000
+            },
+            "all_ranked_offers": [
+              {
+                "product_id": "PROD-SNY-XM5",
+                "product_name": "Sony WH-1000XM5 Wireless Headphones",
+                "platform": "shopee",
+                "variant": "Standard",
+                "listed_price": 8490000,
+                "discount_price": 6490000,
+                "voucher_discount": 300000,
+                "final_effective_price": 6190000,
+                "shipping_fee": 25000,
+                "seller_name": "Sony Official Store Shopee",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              },
+              {
+                "product_id": "PROD-SNY-XM5",
+                "product_name": "Sony WH-1000XM5 Wireless Headphones",
+                "platform": "tiki",
+                "variant": "Standard",
+                "listed_price": 8490000,
+                "discount_price": 6690000,
+                "voucher_discount": 400000,
+                "final_effective_price": 6290000,
+                "shipping_fee": 0,
+                "seller_name": "Tiki Trading",
+                "seller_rating": 4.8,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ]
+          }
+        },
+        {
+          "tool": "compare_multi_platform_prices",
+          "args": {
+            "product_name": "Apple AirPods Pro 2"
+          },
+          "result": {
+            "tool": "compare_multi_platform_prices",
+            "product_name": "Apple AirPods Pro 2",
+            "variant": "",
+            "offers_compared": 2,
+            "best_deal": {
+              "platform": "tiki",
+              "seller": "Tiki Trading",
+              "final_price": 4740000,
+              "original_discount_price": 4890000,
+              "voucher_discount": 150000,
+              "shipping_fee": 0
+            },
+            "all_ranked_offers": [
+              {
+                "product_id": "PROD-APP-AP2",
+                "product_name": "Apple AirPods Pro 2 USB-C",
+                "platform": "tiki",
+                "variant": "USB-C MagSafe",
+                "listed_price": 6190000,
+                "discount_price": 4890000,
+                "voucher_discount": 150000,
+                "final_effective_price": 4740000,
+                "shipping_fee": 0,
+                "seller_name": "Tiki Trading",
+                "seller_rating": 4.8,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              },
+              {
+                "product_id": "PROD-APP-AP2",
+                "product_name": "Apple AirPods Pro 2 USB-C",
+                "platform": "shopee",
+                "variant": "USB-C MagSafe",
+                "listed_price": 6190000,
+                "discount_price": 4990000,
+                "voucher_discount": 200000,
+                "final_effective_price": 4790000,
+                "shipping_fee": 20000,
+                "seller_name": "Apple Flagship Store Shopee",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "D17_three_sources_triage",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "three_source_triage",
+        "difficulty": "hard",
+        "what_it_tests": "Một yêu cầu cần 3 nguồn dữ liệu khác nhau."
+      },
+      "input": "Xem thông số Nintendo Switch OLED trong catalog, tra giá máy trên Shopee và xem chính sách đổi trả hàng.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_product_catalog",
+            "args": {
+              "query": "Nintendo Switch OLED",
+              "category": "gaming"
+            }
+          },
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "shopee",
+              "product_name": "Nintendo Switch OLED"
+            }
+          },
+          {
+            "name": "platform_policy",
+            "args": {
+              "query": "đổi trả",
+              "policy_area": "return_and_refund"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": true,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "search_product_catalog",
+            "args": {
+              "query": "Nintendo Switch OLED"
+            }
+          },
+          {
+            "name": "query_platform_price",
+            "args": {
+              "product_name": "Nintendo Switch OLED",
+              "platform": "shopee"
+            }
+          },
+          {
+            "name": "platform_policy",
+            "args": {
+              "policy_area": "return_and_refund",
+              "query": "chính sách đổi trả hàng"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "wrong_arg_value",
+        "failure_type": "wrong_tool",
+        "failures": [
+          "category: expected 'gaming', got None",
+          "query: expected 'đổi trả', got 'chính sách đổi trả hàng'"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "search_product_catalog",
+          "args": {
+            "query": "Nintendo Switch OLED"
+          },
+          "result": {
+            "tool": "search_product_catalog",
+            "query": "Nintendo Switch OLED",
+            "category": "all",
+            "total_matches": 2,
+            "products": [
+              {
+                "product_id": "PROD-NSW-OLED",
+                "name": "Nintendo Switch OLED Model",
+                "brand": "Nintendo",
+                "category": "gaming",
+                "msrp": 8200000,
+                "variants": [
+                  "Standard 64GB"
+                ],
+                "colors": [
+                  "White",
+                  "Neon Blue/Red"
+                ],
+                "release_year": 2021,
+                "specs": "Màn hình 7-inch OLED sắc nét, Bộ nhớ trong 64GB, Loa nâng cấp, Chân đế điều chỉnh linh hoạt, Dock có cổng LAN"
+              },
+              {
+                "product_id": "PROD-IP15P",
+                "name": "Apple iPhone 15 Pro",
+                "brand": "Apple",
+                "category": "smartphone",
+                "msrp": 28990000,
+                "variants": [
+                  "128GB",
+                  "256GB",
+                  "512GB"
+                ],
+                "colors": [
+                  "Titanium Black",
+                  "Natural Titanium",
+                  "Blue Titanium"
+                ],
+                "release_year": 2023,
+                "specs": "Chip A17 Pro, Màn hình 6.1 inch Super Retina XDR OLED 120Hz, Camera 48MP, Khung Titan, Cổng USB-C"
+              }
+            ]
+          }
+        },
+        {
+          "tool": "query_platform_price",
+          "args": {
+            "product_name": "Nintendo Switch OLED",
+            "platform": "shopee"
+          },
+          "result": {
+            "tool": "query_platform_price",
+            "platform": "shopee",
+            "product_name": "Nintendo Switch OLED",
+            "variant": "",
+            "matches": [
+              {
+                "product_id": "PROD-NSW-OLED",
+                "product_name": "Nintendo Switch OLED Model",
+                "platform": "shopee",
+                "variant": "Standard 64GB",
+                "listed_price": 8200000,
+                "discount_price": 6890000,
+                "voucher_discount": 200000,
+                "final_effective_price": 6690000,
+                "shipping_fee": 25000,
+                "seller_name": "GameStore VN",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ],
+            "count": 1
+          }
+        },
+        {
+          "tool": "platform_policy",
+          "args": {
+            "policy_area": "return_and_refund",
+            "query": "chính sách đổi trả hàng"
+          },
+          "result": {
+            "tool": "platform_policy",
+            "query": "chính sách đổi trả hàng",
+            "policy_area": "return_and_refund",
+            "total_matches": 1,
+            "policies": [
+              {
+                "policy_area": "return_and_refund",
+                "title": "Chính sách Đổi Trả & Hoàn Tiền 15 Ngày",
+                "content": "Người mua được đổi trả hàng miễn phí trong vòng 15 ngày đối với hàng công nghệ điện tử nếu có lỗi do nhà sản xuất hoặc sản phẩm giao không đúng mô tả/mã phân loại.",
+                "conditions": "Sản phẩm phải còn nguyên hộp, đầy đủ phụ kiện, chưa kích hoạt bảo hành Apple Care/Samsung Care nếu có, và có video mở hộp đối chiếu."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "D18_user_and_price_parallel",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "user_and_price_parallel",
+        "difficulty": "hard",
+        "what_it_tests": "Tra cứu user profile và kiểm tra giá là hai hành vi độc lập."
+      },
+      "input": "Tra tài khoản khách hàng USER-102 và kiểm tra giá tai nghe Sony WH-1000XM5 trên sàn Tiki.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup_user_profile",
+            "args": {
+              "user_id": "USER-102"
+            }
+          },
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "tiki",
+              "product_name": "Sony WH-1000XM5"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup_user_profile",
+            "args": {
+              "user_id": "USER-102"
+            }
+          },
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "tiki",
+              "product_name": "Sony WH-1000XM5"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup_user_profile",
+          "args": {
+            "user_id": "USER-102"
+          },
+          "result": {
+            "tool": "lookup_user_profile",
+            "user_id": "USER-102",
+            "profile": {
+              "user_id": "USER-102",
+              "full_name": "Tran Thi Binh",
+              "tier": "gold",
+              "shipping_city": "TP Ho Chi Minh",
+              "freeship_eligible": true,
+              "saved_vouchers": [
+                "VCH-200K-AUDIO"
+              ],
+              "active_alerts": [
+                "PROD-SNY-XM5"
+              ]
+            }
+          }
+        },
+        {
+          "tool": "query_platform_price",
+          "args": {
+            "platform": "tiki",
+            "product_name": "Sony WH-1000XM5"
+          },
+          "result": {
+            "tool": "query_platform_price",
+            "platform": "tiki",
+            "product_name": "Sony WH-1000XM5",
+            "variant": "",
+            "matches": [
+              {
+                "product_id": "PROD-SNY-XM5",
+                "product_name": "Sony WH-1000XM5 Wireless Headphones",
+                "platform": "tiki",
+                "variant": "Standard",
+                "listed_price": 8490000,
+                "discount_price": 6690000,
+                "voucher_discount": 400000,
+                "final_effective_price": 6290000,
+                "shipping_fee": 0,
+                "seller_name": "Tiki Trading",
+                "seller_rating": 4.8,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ],
+            "count": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "D19_ambiguous_platform",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_platform_choice",
+        "difficulty": "hard",
+        "what_it_tests": "Tên sàn mơ hồ phải hỏi lại người dùng để chọn sàn chuẩn xác."
+      },
+      "input": "Kiểm tra giá chuột Logitech MX Master 3S trên sàn thương mại điện tử màu cam.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "choice",
+              "options": [
+                "shopee",
+                "tiki",
+                "lazada",
+                "cellphones"
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn đang nhắc đến sàn thương mại điện tử nào? (Sàn màu cam thường là Shopee)",
+              "response_type": "choice",
+              "options": [
+                "shopee",
+                "tiki",
+                "lazada",
+                "cellphones"
+              ]
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn đang nhắc đến sàn thương mại điện tử nào? (Sàn màu cam thường là Shopee)",
+            "response_type": "choice",
+            "options": [
+              "shopee",
+              "tiki",
+              "lazada",
+              "cellphones"
+            ]
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Bạn đang nhắc đến sàn thương mại điện tử nào? (Sàn màu cam thường là Shopee)",
+            "response_type": "choice",
+            "options": [
+              "shopee",
+              "tiki",
+              "lazada",
+              "cellphones"
+            ],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "D20_format_without_refetch",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "format_only_boundary",
+        "difficulty": "hard",
+        "what_it_tests": "Tôn trọng yêu cầu 'không tìm lại'; gọi thêm tool quét giá sẽ fail."
+      },
+      "input": "Đã có bảng giá: Dell U2723QE trên Shopee 12490000, CellphoneS 12690000. Chỉ format thành ranking report tên 'Dell U2723QE Deals'; không tìm kiếm lại.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "format_price_comparison",
+            "args": {
+              "template": "ranking",
+              "comparison_title": "Dell U2723QE Deals"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "format_price_comparison",
+            "args": {
+              "comparison_title": "Dell U2723QE Deals",
+              "findings": [
+                {
+                  "status": "available",
+                  "price": 12490000,
+                  "platform": "Shopee"
+                },
+                {
+                  "status": "available",
+                  "platform": "CellphoneS",
+                  "price": 12690000
+                }
+              ],
+              "template": "ranking"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "unnecessary_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "format_price_comparison",
+          "args": {
+            "comparison_title": "Dell U2723QE Deals",
+            "findings": [
+              {
+                "status": "available",
+                "price": 12490000,
+                "platform": "Shopee"
+              },
+              {
+                "status": "available",
+                "platform": "CellphoneS",
+                "price": 12690000
+              }
+            ],
+            "template": "ranking"
+          },
+          "result": {
+            "tool": "format_price_comparison",
+            "template": "ranking",
+            "comparison_title": "Dell U2723QE Deals",
+            "items_count": 2,
+            "formatted_report": "# Dell U2723QE Deals\nMẫu hiển thị: ranking\n\n## Xếp hạng giá từ thấp đến cao:\n1. SHOPEE: 12,490,000 VNĐ\n2. CELLPHONES: 12,690,000 VNĐ"
+          }
+        }
+      ]
+    },
+    {
+      "id": "M01_clarify_variant_then_compare",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_clarify_variant",
+        "difficulty": "medium",
+        "what_it_tests": "Kế thừa phiên bản 256GB từ lượt trước để gọi compare_multi_platform_prices."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm giá iPhone 15 Pro rẻ nhất."
+        },
+        {
+          "role": "user",
+          "content": "Mình muốn bản 256GB."
+        },
+        {
+          "role": "user",
+          "content": "So sánh giá trên tất cả các sàn giúp mình."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "iPhone 15 Pro",
+              "variant": "256GB"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "iPhone 15 Pro",
+              "variant": "256GB"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "compare_multi_platform_prices",
+          "args": {
+            "product_name": "iPhone 15 Pro",
+            "variant": "256GB"
+          },
+          "result": {
+            "tool": "compare_multi_platform_prices",
+            "product_name": "iPhone 15 Pro",
+            "variant": "256GB",
+            "offers_compared": 2,
+            "best_deal": {
+              "platform": "tiki",
+              "seller": "Tiki Trading Official",
+              "final_price": 26790000,
+              "original_discount_price": 27490000,
+              "voucher_discount": 700000,
+              "shipping_fee": 0
+            },
+            "all_ranked_offers": [
+              {
+                "product_id": "PROD-IP15P",
+                "product_name": "Apple iPhone 15 Pro",
+                "platform": "tiki",
+                "variant": "256GB",
+                "listed_price": 31990000,
+                "discount_price": 27490000,
+                "voucher_discount": 700000,
+                "final_effective_price": 26790000,
+                "shipping_fee": 0,
+                "seller_name": "Tiki Trading Official",
+                "seller_rating": 4.8,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              },
+              {
+                "product_id": "PROD-IP15P",
+                "product_name": "Apple iPhone 15 Pro",
+                "platform": "shopee",
+                "variant": "256GB",
+                "listed_price": 31990000,
+                "discount_price": 27890000,
+                "voucher_discount": 600000,
+                "final_effective_price": 27290000,
+                "shipping_fee": 30000,
+                "seller_name": "Apple Flagship Store Shopee",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "M02_profile_then_platform_check",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_user_to_price",
+        "difficulty": "medium",
+        "what_it_tests": "Nhận diện lượt mới hỏi giá trên Shopee."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tôi là khách hàng USER-101."
+        },
+        {
+          "role": "user",
+          "content": "Xem giá MacBook Air M3 trên Shopee xem giá bao nhiêu."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "shopee",
+              "product_name": "MacBook Air M3"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "shopee",
+              "product_name": "MacBook Air M3"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "query_platform_price",
+          "args": {
+            "platform": "shopee",
+            "product_name": "MacBook Air M3"
+          },
+          "result": {
+            "tool": "query_platform_price",
+            "platform": "shopee",
+            "product_name": "MacBook Air M3",
+            "variant": "",
+            "error": "not_found",
+            "message": "Không tìm thấy sản phẩm MacBook Air M3 trên sàn shopee",
+            "available_platforms": [
+              "shopee",
+              "tiki",
+              "lazada",
+              "cellphones"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "M03_policy_to_price_comparison",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_policy_to_price",
+        "difficulty": "medium",
+        "what_it_tests": "Chuyển từ hỏi policy sang quét giá so sánh."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Chính sách đổi trả hàng điện tử của các sàn thế nào?"
+        },
+        {
+          "role": "user",
+          "content": "Thôi mình hiểu rồi, giờ so sánh giá iPad Air M2 trên các sàn giúp mình."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "iPad Air M2"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "compare_multi_platform_prices",
+            "args": {
+              "product_name": "iPad Air M2"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "compare_multi_platform_prices",
+          "args": {
+            "product_name": "iPad Air M2"
+          },
+          "result": {
+            "tool": "compare_multi_platform_prices",
+            "product_name": "iPad Air M2",
+            "variant": "",
+            "error": "no_offers_found",
+            "message": "Không tìm thấy ưu đãi nào cho iPad Air M2 trên các sàn được chọn."
+          }
+        }
+      ]
+    },
+    {
+      "id": "M04_refine_target_price_alert",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_refine_alert_boundary",
+        "difficulty": "hard",
+        "what_it_tests": "Sau khi đổi mức giá vẫn phải dừng ở confirmation boundary."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Đặt thông báo giá cho Sony WH-1000XM5 khi dưới 6500000."
+        },
+        {
+          "role": "user",
+          "content": "Đổi thành giá dưới 6000000 nhé."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [],
+        "actual_text": "{\n  \"intent\": \"set_price_alert\",\n  \"action\": \"clarify\",\n  \"reply\": \"Tôi đã cập nhật mức giá mục tiêu cho Sony WH-1000XM5 thành 6.000.000 VNĐ. Bạn có chắc chắn muốn đặt thông báo theo dõi giá cho sản phẩm này với mức giá mới không?\",\n  \"evidence_ids\": [],\n  \"clarify_params\": {\n    \"question\": \"Bạn có chắc chắn muốn đặt thông báo theo dõi giá cho Sony WH-1000XM5 với mức giá mục tiêu là 6.000.000 VNĐ không?\",\n    \"response_type\": \"yes_no\"\n  }\n}",
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_boundary",
+        "failures": [
+          "missing tool call clarify"
+        ]
+      },
+      "tool_results": []
+    },
+    {
+      "id": "M05_alert_confirmation_flow",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_alert_confirmation",
+        "difficulty": "hard",
+        "what_it_tests": "Yêu cầu hỏi xác nhận trước khi kích hoạt alert."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Đặt alert giá iPhone 15 Pro mức 24000000."
+        },
+        {
+          "role": "user",
+          "content": "Đổi giá thành 23500000."
+        },
+        {
+          "role": "user",
+          "content": "Hãy cho mình xem lại và hỏi xác nhận trước khi lưu."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [],
+        "actual_text": "{\n  \"intent\": \"set_price_alert\",\n  \"action\": \"clarify\",\n  \"reply\": \"Tôi đã ghi nhận yêu cầu đặt thông báo giá cho iPhone 15 Pro với mức giá mục tiêu là 23.500.000 VNĐ. Bạn có chắc chắn muốn lưu thiết lập này không?\",\n  \"evidence_ids\": [],\n  \"clarify_params\": {\n    \"question\": \"Bạn có chắc chắn muốn lưu thông báo giá cho iPhone 15 Pro ở mức 23.500.000 VNĐ không?\",\n    \"response_type\": \"yes_no\"\n  }\n}",
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_boundary",
+        "failures": [
+          "missing tool call clarify"
+        ]
+      },
+      "tool_results": []
+    },
+    {
+      "id": "M06_switch_tool_multiturn",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_tool",
+        "difficulty": "hard",
+        "what_it_tests": "Intent mới thay tra giá bằng tra cứu catalog."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Kiểm tra giá Nintendo Switch trên Tiki."
+        },
+        {
+          "role": "user",
+          "content": "Thôi không xem giá nữa, tìm thông số màn hình của Nintendo Switch OLED trong catalog."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_product_catalog",
+            "args": {
+              "query": "Nintendo Switch OLED",
+              "category": "gaming"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [],
+        "actual_text": "{\n  \"intent\": \"search_product_specs\",\n  \"action\": \"search_product_catalog(query='Nintendo Switch OLED', category='gaming')\",\n  \"reply\": \"Được rồi, mình sẽ tìm thông số màn hình của Nintendo Switch OLED trong catalog cho bạn nhé.\",\n  \"evidence_ids\": []\n}",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_tool",
+        "failures": [
+          "missing tool call search_product_catalog"
+        ]
+      },
+      "tool_results": []
+    },
+    {
+      "id": "M07_cancel_previous_action",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_cancel_action",
+        "difficulty": "hard",
+        "what_it_tests": "Lệnh hủy phải thắng yêu cầu tạo alert cũ; không gọi tool."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tạo thông báo giá cho màn hình Dell U2723QE."
+        },
+        {
+          "role": "user",
+          "content": "Dừng lại, không tạo thông báo nào cả."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ nói bạn đã hiểu yêu cầu hủy."
+        }
+      ],
+      "expect": {
+        "no_tool": true,
+        "behavior": "answer_without_tool"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "{\n  \"intent\": \"cancel_action\",\n  \"action\": \"none\",\n  \"reply\": \"Tôi đã hiểu, yêu cầu tạo thông báo giá cho màn hình Dell U2723QE đã được hủy bỏ theo yêu cầu của bạn.\",\n  \"evidence_ids\": []\n}",
+        "case_failure_type": "unnecessary_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "M08_correct_then_parallel",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_correction_parallel",
+        "difficulty": "hard",
+        "what_it_tests": "Sử dụng model đã sửa MX Master 3S và gọi 2 sàn song song."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tra giá chuột MX Master 2S."
+        },
+        {
+          "role": "user",
+          "content": "À nhầm, mã đúng là MX Master 3S."
+        },
+        {
+          "role": "user",
+          "content": "Kiểm tra giá sản phẩm đó trên cả Shopee và Tiki."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "shopee",
+              "product_name": "MX Master 3S"
+            }
+          },
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "tiki",
+              "product_name": "MX Master 3S"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "query_platform_price",
+            "args": {
+              "platform": "shopee",
+              "product_name": "MX Master 3S"
+            }
+          },
+          {
+            "name": "query_platform_price",
+            "args": {
+              "product_name": "MX Master 3S",
+              "platform": "tiki"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "query_platform_price",
+          "args": {
+            "platform": "shopee",
+            "product_name": "MX Master 3S"
+          },
+          "result": {
+            "tool": "query_platform_price",
+            "platform": "shopee",
+            "product_name": "MX Master 3S",
+            "variant": "",
+            "matches": [
+              {
+                "product_id": "PROD-LOG-MX3S",
+                "product_name": "Logitech MX Master 3S Wireless Mouse",
+                "platform": "shopee",
+                "variant": "Standard",
+                "listed_price": 2490000,
+                "discount_price": 1990000,
+                "voucher_discount": 100000,
+                "final_effective_price": 1890000,
+                "shipping_fee": 18000,
+                "seller_name": "Logitech Official Shopee",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ],
+            "count": 1
+          }
+        },
+        {
+          "tool": "query_platform_price",
+          "args": {
+            "product_name": "MX Master 3S",
+            "platform": "tiki"
+          },
+          "result": {
+            "tool": "query_platform_price",
+            "platform": "tiki",
+            "product_name": "MX Master 3S",
+            "variant": "",
+            "matches": [
+              {
+                "product_id": "PROD-LOG-MX3S",
+                "product_name": "Logitech MX Master 3S Wireless Mouse",
+                "platform": "tiki",
+                "variant": "Standard",
+                "listed_price": 2490000,
+                "discount_price": 1950000,
+                "voucher_discount": 50000,
+                "final_effective_price": 1900000,
+                "shipping_fee": 0,
+                "seller_name": "Tiki Official",
+                "seller_rating": 4.9,
+                "stock_status": "in_stock",
+                "warranty_months": 12,
+                "condition": "new"
+              }
+            ],
+            "count": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "M09_confirmation_invalidated",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "confirmation_invalidated_by_change",
+        "difficulty": "hard",
+        "what_it_tests": "Xác nhận cũ mất hiệu lực khi thông số sản phẩm hoặc giá thay đổi."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tôi xác nhận đặt alert giá iPad Air M2 14 triệu."
+        },
+        {
+          "role": "user",
+          "content": "Khoan, đổi thành 13.5 triệu và bản 256GB."
+        },
+        {
+          "role": "user",
+          "content": "Hãy rà lại thông tin mới trước."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [],
+        "actual_text": "{\n  \"intent\": \"confirm_price_alert_details\",\n  \"action\": \"clarify\",\n  \"reply\": \"Tôi đã cập nhật thông tin theo dõi giá cho iPad Air M2, phiên bản 256GB với mức giá mục tiêu là 13.5 triệu đồng. Bạn có chắc chắn muốn đặt thông báo cho sản phẩm này không?\",\n  \"evidence_ids\": [],\n  \"clarify_params\": {\n    \"question\": \"Bạn có chắc chắn muốn đặt thông báo cho iPad Air M2 (256GB) với mức giá mục tiêu là 13.5 triệu đồng không?\",\n    \"response_type\": \"yes_no\"\n  }\n}",
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_boundary",
+        "failures": [
+          "missing tool call clarify"
+        ]
+      },
+      "tool_results": []
+    },
+    {
+      "id": "M10_latest_intent_wins",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "latest_intent_wins",
+        "difficulty": "hard",
+        "what_it_tests": "Ý định mới nhất thay thế hoàn toàn yêu cầu cũ."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Kiểm tra giá Galaxy S24 Ultra trên Shopee."
+        },
+        {
+          "role": "user",
+          "content": "Không cần kiểm tra giá nữa."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ tra cứu thông tin tài khoản USER-104."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup_user_profile",
+            "args": {
+              "user_id": "USER-104"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [],
+        "actual_text": "{\n  \"intent\": \"lookup_user_profile\",\n  \"action\": \"lookup_user_profile(user_id='USER-104')\",\n  \"reply\": \"Tôi đang tra cứu thông tin tài khoản USER-104 cho bạn, vui lòng đợi trong giây lát.\",\n  \"evidence_ids\": []\n}",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_tool",
+        "failures": [
+          "missing tool call lookup_user_profile"
+        ]
+      },
+      "tool_results": []
+    }
+  ]
+}

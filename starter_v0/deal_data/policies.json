@@ -1,0 +1,34 @@
+{
+  "policies": [
+    {
+      "policy_area": "price_protection",
+      "title": "Chính sách Cam kết Giá Rẻ & Bù Chênh Lệch",
+      "content": "Nếu người dùng phát hiện sản phẩm cùng model, cùng tình trạng phân phối chính hãng rẻ hơn trên sàn khác trong vòng 7 ngày kể từ khi mua, sàn sẽ hoàn lại 100% phần tiền chênh lệch vào ví điểm thưởng.",
+      "conditions": "Áp dụng cho các shop chính hãng (Mall/Official/Trading). Không áp dụng cho hàng đã qua sử dụng, hàng nhập khẩu tiểu ngạch hoặc flash sale giới hạn số lượng dưới 10 chiếc."
+    },
+    {
+      "policy_area": "return_and_refund",
+      "title": "Chính sách Đổi Trả & Hoàn Tiền 15 Ngày",
+      "content": "Người mua được đổi trả hàng miễn phí trong vòng 15 ngày đối với hàng công nghệ điện tử nếu có lỗi do nhà sản xuất hoặc sản phẩm giao không đúng mô tả/mã phân loại.",
+      "conditions": "Sản phẩm phải còn nguyên hộp, đầy đủ phụ kiện, chưa kích hoạt bảo hành Apple Care/Samsung Care nếu có, và có video mở hộp đối chiếu."
+    },
+    {
+      "policy_area": "authenticity_guarantee",
+      "title": "Cam kết Hàng Chính Hãng & Đền Tiền 111%",
+      "content": "Mọi sản phẩm gắn nhãn Mall/Official Store đều được cam kết chính hãng 100%. Nếu phát hiện hàng giả/hàng nhái, người mua được bồi hoàn gấp đôi (đền tiền 111% đến 200% giá trị đơn hàng).",
+      "conditions": "Cần biên bản giám định từ trung tâm bảo hành ủy quyền của hãng tại Việt Nam."
+    },
+    {
+      "policy_area": "shipping_subsidy",
+      "title": "Chính sách Trợ Giá Vận Chuyển Toàn Quốc",
+      "content": "Miễn phí vận chuyển cho đơn hàng từ 500.000đ trở lên đối với thành viên Diamond và Gold. Hỗ trợ tối đa 30.000đ phí vận chuyển ngoại thành cho các đơn hàng công nghệ cồng kềnh (màn hình, PC).",
+      "conditions": "Áp dụng khi chọn đơn vị vận chuyển hỏa tốc hoặc tiêu chuẩn có liên kết."
+    },
+    {
+      "policy_area": "price_alert_terms",
+      "title": "Điều khoản Đăng Ký Thông Báo Giá Rẻ Nhất",
+      "content": "Hệ thống sẽ gửi thông báo qua email hoặc ứng dụng khi giá sản phẩm giảm xuống bằng hoặc thấp hơn ngưỡng giá mục tiêu mà người dùng đã thiết lập.",
+      "conditions": "Yêu cầu người dùng xác nhận rõ ràng sản phẩm, phiên bản và ngưỡng giá mong muốn trước khi kích hoạt theo dõi."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "products_history": [
+    {
+      "product_id": "PROD-IP15P",
+      "product_name": "Apple iPhone 15 Pro 128GB",
+      "all_time_low": 23990000,
+      "all_time_high": 28990000,
+      "average_90d": 24900000,
+      "recent_price_inflated": false,
+      "trend": "downward",
+      "recommendation": "REAL_DEAL",
+      "analysis": "Mức giá 23.990.000đ hiện tại đang ở đáy thấp nhất trong 90 ngày qua (giá trung bình 24.900.000đ). Đây là deal thật rất đáng mua."
+    },
+    {
+      "product_id": "PROD-MBA-M3",
+      "product_name": "Apple MacBook Air 13-inch M3 8GB/256GB",
+      "all_time_low": 23890000,
+      "all_time_high": 27990000,
+      "average_90d": 25200000,
+      "recent_price_inflated": false,
+      "trend": "stable",
+      "recommendation": "REAL_DEAL",
+      "analysis": "Giá 23.890.000đ trên Shopee sau voucher là mức thấp nhất từ trước tới nay."
+    },
+    {
+      "product_id": "PROD-SNY-XM5",
+      "product_name": "Sony WH-1000XM5 Wireless Headphones",
+      "all_time_low": 6190000,
+      "all_time_high": 8490000,
+      "average_90d": 6600000,
+      "recent_price_inflated": false,
+      "trend": "downward",
+      "recommendation": "REAL_DEAL",
+      "analysis": "Giá 6.190.000đ thấp hơn 400.000đ so với mức trung bình 90 ngày."
+    },
+    {
+      "product_id": "PROD-DEL-U2723",
+      "product_name": "Dell UltraSharp U2723QE 27 inch 4K",
+      "all_time_low": 12490000,
+      "all_time_high": 14500000,
+      "average_90d": 12800000,
+      "recent_price_inflated": false,
+      "trend": "stable",
+      "recommendation": "NORMAL_PRICE",
+      "analysis": "Giá 12.490.000đ là giá phổ biến trong các đợt sale của Dell, không phải đợt giảm sâu đột biến."
+    },
+    {
+      "product_id": "PROD-IPA-M2",
+      "product_name": "Apple iPad Air 11-inch M2 128GB",
+      "all_time_low": 14390000,
+      "all_time_high": 16990000,
+      "average_90d": 14600000,
+      "recent_price_inflated": false,
+      "trend": "downward",
+      "recommendation": "REAL_DEAL",
+      "analysis": "Deal tại Tiki 14.390.000đ kèm miễn phí vận chuyển là mức giá rất tốt."
+    },
+    {
+      "product_id": "PROD-LOG-MX3S",
+      "product_name": "Logitech MX Master 3S",
+      "all_time_low": 1790000,
+      "all_time_high": 2490000,
+      "average_90d": 1890000,
+      "recent_price_inflated": true,
+      "trend": "inflated_then_discounted",
+      "recommendation": "FAKE_DISCOUNT",
+      "analysis": "Cảnh báo: Shop đã tăng giá niêm yết lên 2.490.000đ rồi gắn nhãn giảm 20% còn 1.990.000đ. Thực tế giá thị trường 90 ngày chỉ quanh mức 1.850.000đ."
+    }
+  ]
+}

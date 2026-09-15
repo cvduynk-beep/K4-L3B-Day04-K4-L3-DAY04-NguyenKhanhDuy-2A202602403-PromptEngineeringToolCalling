@@ -1,0 +1,114 @@
+{
+  "products": [
+    {
+      "product_id": "PROD-IP15P",
+      "name": "Apple iPhone 15 Pro",
+      "brand": "Apple",
+      "category": "smartphone",
+      "msrp": 28990000,
+      "variants": ["128GB", "256GB", "512GB"],
+      "colors": ["Titanium Black", "Natural Titanium", "Blue Titanium"],
+      "release_year": 2023,
+      "specs": "Chip A17 Pro, Màn hình 6.1 inch Super Retina XDR OLED 120Hz, Camera 48MP, Khung Titan, Cổng USB-C"
+    },
+    {
+      "product_id": "PROD-MBA-M3",
+      "name": "Apple MacBook Air 13-inch M3",
+      "brand": "Apple",
+      "category": "laptop",
+      "msrp": 27990000,
+      "variants": ["8GB/256GB", "16GB/512GB"],
+      "colors": ["Midnight", "Space Gray", "Silver", "Starlight"],
+      "release_year": 2024,
+      "specs": "Chip Apple M3 8-core CPU / 8-core GPU, Màn hình Liquid Retina 13.6 inch, Pin 18 giờ, Sạc MagSafe 3"
+    },
+    {
+      "product_id": "PROD-SNY-XM5",
+      "name": "Sony WH-1000XM5 Wireless Headphones",
+      "brand": "Sony",
+      "category": "audio",
+      "msrp": 8490000,
+      "variants": ["Standard"],
+      "colors": ["Black", "Silver", "Midnight Blue"],
+      "release_year": 2022,
+      "specs": "Chống ồn chủ động ANC hàng đầu với 8 micro và 2 bộ xử lý, Driver 30mm, Pin 30 giờ, Hỗ trợ LDAC, DSEE Extreme"
+    },
+    {
+      "product_id": "PROD-DEL-U2723",
+      "name": "Dell UltraSharp U2723QE 27 inch 4K",
+      "brand": "Dell",
+      "category": "monitor",
+      "msrp": 14500000,
+      "variants": ["27-inch 4K"],
+      "colors": ["Platinum Silver"],
+      "release_year": 2022,
+      "specs": "Tấm nền IPS Black, Độ phân giải 3840x2160 4K, 100% sRGB, 98% DCI-P3, USB-C Hub 90W PD, Cổng RJ45 LAN"
+    },
+    {
+      "product_id": "PROD-IPA-M2",
+      "name": "Apple iPad Air 11-inch M2",
+      "brand": "Apple",
+      "category": "tablet",
+      "msrp": 16990000,
+      "variants": ["128GB Wi-Fi", "256GB Wi-Fi"],
+      "colors": ["Space Gray", "Blue", "Purple", "Starlight"],
+      "release_year": 2024,
+      "specs": "Chip Apple M2, Màn hình Liquid Retina 11 inch True Tone, Hỗ trợ Apple Pencil Pro và Magic Keyboard"
+    },
+    {
+      "product_id": "PROD-NSW-OLED",
+      "name": "Nintendo Switch OLED Model",
+      "brand": "Nintendo",
+      "category": "gaming",
+      "msrp": 8200000,
+      "variants": ["Standard 64GB"],
+      "colors": ["White", "Neon Blue/Red"],
+      "release_year": 2021,
+      "specs": "Màn hình 7-inch OLED sắc nét, Bộ nhớ trong 64GB, Loa nâng cấp, Chân đế điều chỉnh linh hoạt, Dock có cổng LAN"
+    },
+    {
+      "product_id": "PROD-LOG-MX3S",
+      "name": "Logitech MX Master 3S Wireless Mouse",
+      "brand": "Logitech",
+      "category": "accessory",
+      "msrp": 2490000,
+      "variants": ["Standard"],
+      "colors": ["Graphite", "Pale Gray"],
+      "release_year": 2022,
+      "specs": "Cảm biến 8000 DPI Darkfield lướt trên mọi bề mặt, Click tĩnh âm Quiet Clicks, Cuộn siêu tốc MagSpeed, Kết nối 3 thiết bị"
+    },
+    {
+      "product_id": "PROD-S24U",
+      "name": "Samsung Galaxy S24 Ultra",
+      "brand": "Samsung",
+      "category": "smartphone",
+      "msrp": 31990000,
+      "variants": ["256GB", "512GB"],
+      "colors": ["Titanium Gray", "Titanium Black", "Titanium Yellow"],
+      "release_year": 2024,
+      "specs": "Chip Snapdragon 8 Gen 3 for Galaxy, Màn hình 6.8 inch Dynamic AMOLED 2X phẳng, Camera 200MP, Bút S-Pen, Khung Titan"
+    },
+    {
+      "product_id": "PROD-APP-AP2",
+      "name": "Apple AirPods Pro 2 USB-C",
+      "brand": "Apple",
+      "category": "audio",
+      "msrp": 6190000,
+      "variants": ["USB-C MagSafe"],
+      "colors": ["White"],
+      "release_year": 2023,
+      "specs": "Chip H2, Chống ồn chủ động mạnh gấp 2 lần, Chế độ Âm thanh thích ứng Adaptive Audio, Hộp sạc USB-C chống bụi nước IP54"
+    },
+    {
+      "product_id": "PROD-ASU-ROG8",
+      "name": "ASUS ROG Phone 8",
+      "brand": "ASUS",
+      "category": "gaming_phone",
+      "msrp": 22990000,
+      "variants": ["16GB/256GB"],
+      "colors": ["Rebel Grey", "Phantom Black"],
+      "release_year": 2024,
+      "specs": "Snapdragon 8 Gen 3, Màn hình AMOLED 165Hz LTPO, Tản nhiệt buồng hơi GameCool 8, Nút siêu âm AirTrigger, Kháng nước IP68"
+    }
+  ]
+}

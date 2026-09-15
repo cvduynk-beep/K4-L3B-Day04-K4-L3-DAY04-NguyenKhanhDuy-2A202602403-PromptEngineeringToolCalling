@@ -73,7 +73,7 @@ class GeminiProvider:
         self,
         *,
         api_key_env: str = "GEMINI_API_KEY",
-        default_model: str = "gemini-3.5-flash",
+        default_model: str = "gemini-3.1-flash-lite",
     ) -> None:
         self.api_key_env = api_key_env
         self.default_model = default_model
@@ -106,11 +106,26 @@ class GeminiProvider:
             config_kwargs["tools"] = [types.Tool(function_declarations=declarations)]
 
         client = genai.Client(api_key=api_key)
-        resp = client.models.generate_content(
-            model=model or self.default_model,
-            contents=contents,
-            config=types.GenerateContentConfig(**config_kwargs),
-        )
+        import time
+        resp = None
+        last_exc = None
+        for attempt in range(5):
+            try:
+                resp = client.models.generate_content(
+                    model=model or self.default_model,
+                    contents=contents,
+                    config=types.GenerateContentConfig(**config_kwargs),
+                )
+                break
+            except Exception as exc:
+                last_exc = exc
+                err_msg = str(exc)
+                if any(code in err_msg for code in ["503", "429", "UNAVAILABLE", "RESOURCE_EXHAUSTED"]):
+                    time.sleep(2 * (attempt + 1))
+                    continue
+                raise exc
+        if resp is None and last_exc:
+            raise last_exc
 
         text_parts: list[str] = []
         calls: list[ToolCall] = []

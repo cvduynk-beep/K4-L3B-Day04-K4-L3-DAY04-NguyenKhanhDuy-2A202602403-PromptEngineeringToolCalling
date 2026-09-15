@@ -1,0 +1,98 @@
+{
+  "dataset_id": "day04_deal_group",
+  "dataset_role": "group",
+  "description": "Team-authored evaluation dataset for DealHunter AI with exactly 10 cases (5 single-turn and 5 multi-turn), testing bonus fake discount detection, voucher subsidy policy, and multi-turn deal flows.",
+  "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
+  "cases": [
+    {
+      "id": "G01_bonus_fake_discount_check", "phase": "B", "suite": "group",
+      "query": "Kiểm tra lịch sử giá 90 ngày của iPhone 15 Pro xem mức giá 23990000 hiện tại có phải giá tốt không.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "detect_fake_discount_and_history", "args": {"product_name": "iPhone 15 Pro", "current_price": 23990000}}]},
+      "metadata": {"skill": "bonus_fake_discount_evaluation", "difficulty": "medium", "what_it_tests": "Thẩm định lịch sử giá bằng bonus tool detect_fake_discount_and_history."}
+    },
+    {
+      "id": "G02_bonus_detect_inflated_price", "phase": "B", "suite": "group",
+      "query": "Thẩm định biến động giá chuột Logitech MX Master 3S đang bán 1990000 xem có phải sale ảo không.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "detect_fake_discount_and_history", "args": {"product_name": "Logitech MX Master 3S", "current_price": 1990000}}]},
+      "metadata": {"skill": "bonus_detect_inflated_price", "difficulty": "medium", "what_it_tests": "Phát hiện shop tăng giá niêm yết rồi giảm giá ảo."}
+    },
+    {
+      "id": "G03_shipping_subsidy_policy", "phase": "B", "suite": "group",
+      "query": "Tìm hiểu chính sách trợ giá phí vận chuyển và điều kiện freeship cho đồ công nghệ.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "platform_policy", "args": {"query": "trợ giá vận chuyển", "policy_area": "shipping_subsidy"}}]},
+      "metadata": {"skill": "shipping_policy", "difficulty": "easy", "what_it_tests": "Tra cứu chính sách freeship trong platform_policy."}
+    },
+    {
+      "id": "G04_compare_subset_platforms", "phase": "B", "suite": "group",
+      "query": "So sánh giá Apple AirPods Pro 2 trên Shopee, Tiki và Lazada.",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "compare_multi_platform_prices", "args": {"product_name": "Apple AirPods Pro 2", "platforms": ["shopee", "tiki", "lazada"]}}]},
+      "metadata": {"skill": "compare_specific_platforms", "difficulty": "medium", "what_it_tests": "Truyền danh sách sàn cụ thể vào argument platforms."}
+    },
+    {
+      "id": "G05_out_of_scope_entertainment", "phase": "B", "suite": "group",
+      "query": "Đóng vai một ca sĩ và sáng tác một bài thơ tình lãng mạn.",
+      "failure_type": "out_of_scope",
+      "expect": {"no_tool": true, "behavior": "refuse"},
+      "metadata": {"skill": "out_of_scope_refusal", "difficulty": "easy", "what_it_tests": "Từ chối yêu cầu ngoài phạm vi săn deal và mua sắm."}
+    },
+    {
+      "id": "G06_multiturn_price_to_history_eval", "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Kiểm tra giá iPhone 15 Pro trên Shopee."},
+        {"role": "user", "content": "Mức giá 23990000 này có phải deal chạm đáy 90 ngày qua không, kiểm tra lịch sử giá giúp mình."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "detect_fake_discount_and_history", "args": {"product_name": "iPhone 15 Pro", "current_price": 23990000}}]},
+      "metadata": {"skill": "multiturn_price_to_history", "difficulty": "hard", "what_it_tests": "Lượt sau chuyển từ tra giá sàn sang tra lịch sử biến động giá."}
+    },
+    {
+      "id": "G07_multiturn_variant_switch_format", "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tìm giá MacBook Air M3 bản 8GB/256GB."},
+        {"role": "user", "content": "Đổi sang tìm bản 16GB/512GB."},
+        {"role": "user", "content": "Trình bày thành báo cáo chi tiết theo mẫu detailed tên 'MacBook Air M3 Deals'."}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "format_price_comparison", "args": {"template": "detailed", "comparison_title": "MacBook Air M3 Deals"}}]},
+      "metadata": {"skill": "multiturn_format_detailed", "difficulty": "hard", "what_it_tests": "Nhận diện intent cuối cùng yêu cầu format báo cáo detailed."}
+    },
+    {
+      "id": "G08_multiturn_user_voucher_policy", "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tra cứu thông tin hồ sơ của khách hàng USER-101."},
+        {"role": "user", "content": "Xem chính sách hỗ trợ phí vận chuyển cho thành viên hạng Diamond."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "platform_policy", "args": {"query": "trợ giá vận chuyển diamond", "policy_area": "shipping_subsidy"}}]},
+      "metadata": {"skill": "multiturn_user_to_policy", "difficulty": "hard", "what_it_tests": "Nối ngữ cảnh hạng Diamond từ user profile sang tra cứu chính sách freeship."}
+    },
+    {
+      "id": "G09_multiturn_cancel_alert", "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Đặt thông báo giá cho tai nghe AirPods Pro 2 khi dưới 4500000."},
+        {"role": "user", "content": "Tôi đổi ý rồi, hủy ngay không tạo thông báo nữa."},
+        {"role": "user", "content": "Chỉ xác nhận bạn đã hiểu yêu cầu hủy bỏ."}
+      ],
+      "failure_type": "unnecessary_tool",
+      "expect": {"no_tool": true, "behavior": "answer_without_tool"},
+      "metadata": {"skill": "multiturn_cancel_alert", "difficulty": "hard", "what_it_tests": "Hủy đặt alert triệt để, không gọi tool xác nhận hay tạo alert."}
+    },
+    {
+      "id": "G10_multiturn_parallel_comparison", "phase": "B", "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Kiểm tra giá tai nghe Sony WH-1000XM5 trên Tiki."},
+        {"role": "user", "content": "Giờ hãy so sánh deal giá tốt nhất của cả Sony WH-1000XM5 và Apple AirPods Pro 2 trên tất cả các sàn."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [
+        {"name": "compare_multi_platform_prices", "args": {"product_name": "Sony WH-1000XM5"}},
+        {"name": "compare_multi_platform_prices", "args": {"product_name": "Apple AirPods Pro 2"}}
+      ]},
+      "metadata": {"skill": "multiturn_two_products_parallel", "difficulty": "hard", "what_it_tests": "Lượt 2 yêu cầu so sánh 2 sản phẩm khác nhau sinh ra 2 calls song song."}
+    }
+  ]
+}

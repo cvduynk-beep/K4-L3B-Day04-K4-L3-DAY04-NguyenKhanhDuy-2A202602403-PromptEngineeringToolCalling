@@ -6,4 +6,5 @@ __pycache__/
 .env.*
 !.env.example
 /tickets/
+/alerts/
 # Commit reviewed runs, transcripts and analysis as submission evidence.

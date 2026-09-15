@@ -1,107 +1,118 @@
-# starter_v0 — intentionally incomplete first-draft declarations.
-# Students improve routing guidance, argument conventions, missing-information
-# handling, and confirmation boundaries through v1/v2/v3.
-#
-# Keep built-in names and supplied evaluation cases unchanged.
-# Improve descriptions and compatible schemas. Declare team-built bonus tools
-# here and in tools/__init__.py, then test them with team-authored cases.
+# DealHunter AI Tool Declarations (v2)
+# Trợ lý Săn Deal & So Sánh Giá Rẻ Nhất Đa Nền Tảng (Shopee, Lazada, Tiki, CellphoneS)
 tools:
   # ---------------- Core tools ----------------
   - name: clarify
-    description: "Gửi một câu hỏi cho người dùng."
+    description: "Dùng để hỏi lại người dùng khi thiếu thông tin phân loại quan trọng (ví dụ: iPad Air M2 chưa có bản dung lượng) hoặc bắt buộc dùng với response_type='yes_no' để hỏi xác nhận trước khi kích hoạt set_price_alert."
     parameters:
       type: object
       properties:
-        question: {type: string, default: "", description: "Câu hỏi"}
-        response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "Kiểu trả lời"}
-        options: {type: array, default: [], items: {type: string}, description: "Các lựa chọn"}
+        question: {type: string, default: "", description: "Câu hỏi gửi người dùng"}
+        response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "Kiểu phản hồi mong đợi: dùng yes_no cho xác nhận alert, choice cho lựa chọn sàn hoặc dung lượng"}
+        options: {type: array, default: [], items: {type: string}, description: "Danh sách các lựa chọn khi response_type là choice"}
       required: [question]
 
-  - name: search_kb
-    description: "Tìm hướng dẫn hỗ trợ kỹ thuật."
+  - name: query_platform_price
+    description: "Tra cứu giá bán, voucher giảm giá và phí vận chuyển của một sản phẩm trên một sàn TMĐT cụ thể (shopee, tiki, lazada, cellphones). Khi người dùng chỉ định cụ thể 2 hay nhiều sàn (ví dụ: cả Shopee và Tiki), hãy gọi tool này song song cho từng sàn."
     parameters:
       type: object
       properties:
-        query: {type: string, default: "", description: "Nội dung cần tìm"}
-        category: {type: string, enum: [all, vpn, email, wifi, printing, account, security, hardware, software, meeting_room], default: "all", description: "Nhóm hướng dẫn"}
-        top_k: {type: integer, default: 3, description: "Số kết quả"}
+        platform: {type: string, enum: [shopee, tiki, lazada, cellphones], description: "Tên sàn thương mại điện tử"}
+        product_name: {type: string, default: "", description: "Tên hoặc mã sản phẩm"}
+        variant: {type: string, default: "", description: "Phiên bản hoặc dung lượng sản phẩm nếu có (ví dụ: 128GB, 256GB)"}
+      required: [platform]
+
+  - name: compare_multi_platform_prices
+    description: "Chỉ dùng khi người dùng muốn so sánh giá trên TẤT CẢ các sàn hoặc tìm nơi bán rẻ nhất nói chung. Nếu người dùng chỉ đích danh 2 sàn cụ thể (ví dụ: cả Shopee và Tiki), KHÔNG dùng tool này mà hãy gọi query_platform_price cho từng sàn."
+    parameters:
+      type: object
+      properties:
+        product_name: {type: string, description: "Tên sản phẩm cần so sánh giá"}
+        variant: {type: string, default: "", description: "Phiên bản hoặc dung lượng nếu có"}
+        platforms: {type: array, items: {type: string}, default: ["shopee", "tiki", "lazada", "cellphones"], description: "Danh sách các sàn cần so sánh"}
+      required: [product_name]
+
+  - name: search_product_catalog
+    description: "Tìm kiếm thông số kỹ thuật, model chuẩn, năm ra mắt và các phiên bản trong catalog sản phẩm chính thức. Dùng query ngắn gọn là tên sản phẩm (ví dụ: 'Nintendo Switch OLED', 'Dell UltraSharp U2723QE')."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Tên model sản phẩm ngắn gọn"}
+        category: {type: string, enum: [all, smartphone, laptop, audio, monitor, tablet, gaming, accessory, gaming_phone], default: "all", description: "Danh mục sản phẩm (ví dụ: gaming, monitor)"}
+        top_k: {type: integer, default: 3, description: "Số lượng kết quả"}
       required: [query]
 
-  - name: check_service_status
-    description: "Kiểm tra trạng thái một dịch vụ."
+  - name: lookup_user_profile
+    description: "Tra cứu hồ sơ khách hàng, hạng thành viên, quyền lợi freeship và voucher đã lưu dựa vào mã user_id (ví dụ: USER-101, USER-104)."
     parameters:
       type: object
       properties:
-        service: {type: string, enum: [vpn, email, sso, wifi, printing], description: "Tên dịch vụ"}
-        environment: {type: string, enum: [production, staging], default: "production", description: "Môi trường"}
-      required: [service]
+        user_id: {type: string, description: "Mã người dùng (ví dụ: USER-101)"}
+      required: [user_id]
 
-  - name: inspect_device
-    description: "Kiểm tra thông tin và chẩn đoán thiết bị."
-    parameters:
-      type: object
-      properties:
-        asset_id: {type: string, description: "Mã tài sản"}
-        check: {type: string, enum: [all, network, vpn, security, hardware, software], default: "all", description: "Nhóm kiểm tra"}
-      required: [asset_id]
-
-  - name: lookup_user
-    description: "Tra cứu người dùng trong danh bạ hỗ trợ."
-    parameters:
-      type: object
-      properties:
-        employee_id: {type: string, description: "Mã nhân viên"}
-      required: [employee_id]
-
-  - name: format_incident_report
-    description: "Trình bày các kết quả đã có thành báo cáo."
+  - name: format_price_comparison
+    description: "Định dạng số liệu hoặc kết quả giá ĐÃ CÓ SẴN thành bảng báo cáo (ranking, detailed, brief). Dùng tool này ngay khi người dùng yêu cầu trình bày/format kết quả, KHÔNG gọi tool quét lại giá."
     parameters:
       type: object
       properties:
         findings:
           type: array
           default: []
-          description: "Các kết quả đã thu thập"
+          description: "Danh sách các mức giá hoặc ưu đãi đã thu thập"
           items:
             type: object
             properties:
-              label: {type: string}
+              platform: {type: string}
+              price: {type: integer}
+              seller: {type: string}
               detail: {type: string}
-              source: {type: string}
               status: {type: string}
-        template: {type: string, enum: [brief, technical, handoff], default: "brief", description: "Mẫu báo cáo"}
-        incident_title: {type: string, default: "IT incident", description: "Tiêu đề"}
+        template: {type: string, enum: [brief, detailed, ranking], default: "brief", description: "Mẫu báo cáo: ranking (xếp hạng giá), detailed (báo cáo chi tiết), brief (tóm tắt)"}
+        comparison_title: {type: string, default: "Bảng So Sánh Giá Deal", description: "Tiêu đề bảng so sánh"}
       required: [findings, template]
 
-  # ---------------- Optional/advanced tools ----------------
-  - name: search_device_info
-    description: "Tìm thông tin công khai về một model thiết bị trên web. Chỉ truyền hãng, model và loại thông tin; không truyền asset ID, employee ID hoặc dữ liệu nội bộ."
+  - name: platform_policy
+    description: "Tra cứu chính sách bảo hành, cam kết giá rẻ bù chênh lệch và đổi trả của các sàn TMĐT. Dùng từ khóa ngắn gọn cho query (ví dụ: 'bù chênh lệch', 'đổi trả')."
     parameters:
       type: object
       properties:
-        manufacturer: {type: string, description: "Hãng sản xuất công khai, ví dụ Lenovo"}
-        model: {type: string, description: "Tên model công khai, ví dụ ThinkPad T14 Gen 4"}
-        query_type: {type: string, enum: [specs, drivers, support, compatibility], default: "support", description: "Loại thông tin cần tìm"}
-        max_results: {type: integer, default: 3, description: "Số kết quả, tối đa 5"}
-      required: [manufacturer, model, query_type]
-
-  - name: policy
-    description: "Tìm trong chính sách IT nội bộ."
-    parameters:
-      type: object
-      properties:
-        query: {type: string, default: "", description: "Nội dung cần tìm"}
-        policy_area: {type: string, enum: [all, access_control, data_privacy, external_tools, incident_response, service_operations, ticketing], default: "all", description: "Nhóm chính sách"}
-        top_k: {type: integer, default: 3, description: "Số mục"}
+        query: {type: string, default: "", description: "Từ khóa ngắn gọn, ví dụ: 'bù chênh lệch', 'đổi trả'"}
+        policy_area: {type: string, enum: [all, price_protection, return_and_refund, authenticity_guarantee, shipping_subsidy, price_alert_terms], default: "all", description: "Nhóm chính sách"}
+        top_k: {type: integer, default: 3, description: "Số mục kết quả"}
       required: [query]
 
-  - name: create_ticket
-    description: "Tạo một ticket hỗ trợ."
+  # ---------------- Action tool (Requires Confirmation) ----------------
+  - name: set_price_alert
+    description: "Tạo thông báo theo dõi giá. CHỈ được gọi khi người dùng ĐÃ XÁC NHẬN RÕ RÀNG (confirmed=true). Nếu chưa có xác nhận hoặc người dùng vừa đổi giá/phiên bản, KHÔNG được gọi tool này mà phải gọi clarify(response_type='yes_no')."
     parameters:
       type: object
       properties:
-        summary: {type: string, default: "", description: "Tóm tắt sự cố"}
-        priority: {type: string, enum: [low, medium, high, critical], default: "medium", description: "Mức ưu tiên"}
-        asset_id: {type: string, default: "", description: "Mã tài sản nếu có"}
-        confirmed: {type: boolean, default: false, description: "Đã được người dùng xác nhận"}
-      required: [summary]
+        product_name: {type: string, default: "", description: "Tên sản phẩm cần đặt theo dõi"}
+        target_price: {type: integer, description: "Mức giá kỳ vọng (VNĐ) để kích hoạt thông báo"}
+        variant: {type: string, default: "", description: "Phiên bản sản phẩm nếu có"}
+        user_id: {type: string, default: "", description: "Mã người dùng nếu có"}
+        confirmed: {type: boolean, default: false, description: "Đã có xác nhận rõ ràng từ người dùng"}
+      required: [product_name, target_price]
+
+  # ---------------- Optional/Advanced External Tool ----------------
+  - name: search_external_market_price
+    description: "Tìm thông tin giá niêm yết toàn cầu và thông số hãng trên web. Chỉ truyền hãng và model công khai; tuyệt đối không truyền mã người dùng hay dữ liệu cá nhân."
+    parameters:
+      type: object
+      properties:
+        manufacturer: {type: string, description: "Hãng sản xuất công khai, ví dụ Apple, Sony"}
+        model: {type: string, description: "Tên model công khai, ví dụ iPhone 15 Pro, WH-1000XM5"}
+        query_type: {type: string, enum: [price, specs, reviews], default: "price", description: "Loại thông tin cần tra"}
+        max_results: {type: integer, default: 3, description: "Số kết quả tối đa"}
+      required: [manufacturer, model]
+
+  # ---------------- Team Bonus Tool (10 điểm kỹ thuật) ----------------
+  - name: detect_fake_discount_and_history
+    description: "Phân tích biến động giá 90 ngày của sản phẩm để phát hiện giảm giá ảo hoặc xác nhận deal chạm đáy lịch sử."
+    parameters:
+      type: object
+      properties:
+        product_name: {type: string, description: "Tên hoặc mã sản phẩm cần kiểm tra lịch sử giá"}
+        current_price: {type: integer, default: 0, description: "Mức giá hiện tại cần thẩm định"}
+        platform: {type: string, default: "", description: "Sàn đang niêm yết mức giá này nếu có"}
+      required: [product_name]

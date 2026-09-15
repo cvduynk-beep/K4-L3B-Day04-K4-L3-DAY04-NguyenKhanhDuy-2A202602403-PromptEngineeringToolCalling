@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "user_id": "USER-101",
+      "full_name": "Nguyen Van An",
+      "tier": "diamond",
+      "shipping_city": "Ha Noi",
+      "freeship_eligible": true,
+      "saved_vouchers": ["VCH-500K-TECH", "VCH-FREESHIP-MAX"],
+      "active_alerts": ["PROD-IP15P", "PROD-MBA-M3"]
+    },
+    {
+      "user_id": "USER-102",
+      "full_name": "Tran Thi Binh",
+      "tier": "gold",
+      "shipping_city": "TP Ho Chi Minh",
+      "freeship_eligible": true,
+      "saved_vouchers": ["VCH-200K-AUDIO"],
+      "active_alerts": ["PROD-SNY-XM5"]
+    },
+    {
+      "user_id": "USER-103",
+      "full_name": "Le Hoang Cuong",
+      "tier": "standard",
+      "shipping_city": "Da Nang",
+      "freeship_eligible": false,
+      "saved_vouchers": [],
+      "active_alerts": []
+    },
+    {
+      "user_id": "USER-104",
+      "full_name": "Pham Minh Duc",
+      "tier": "silver",
+      "shipping_city": "Hai Phong",
+      "freeship_eligible": false,
+      "saved_vouchers": ["VCH-100K-APP"],
+      "active_alerts": ["PROD-LOG-MX3S"]
+    }
+  ]
+}

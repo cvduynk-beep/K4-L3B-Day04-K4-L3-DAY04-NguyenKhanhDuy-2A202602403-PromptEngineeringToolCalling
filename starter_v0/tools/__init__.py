@@ -5,7 +5,21 @@ from typing import Any
 
 import yaml
 
+# Core shared tools
 from .clarify.tool import ask_user
+
+# DealHunter tools
+from .query_platform_price.tool import query_platform_price
+from .compare_multi_platform_prices.tool import compare_multi_platform_prices
+from .search_product_catalog.tool import search_product_catalog
+from .lookup_user_profile.tool import lookup_user_profile
+from .format_price_comparison.tool import format_price_comparison
+from .platform_policy.tool import search_platform_policy
+from .set_price_alert.tool import set_price_alert
+from .search_external_market_price.tool import search_external_market_price
+from .detect_fake_discount_and_history.tool import detect_fake_discount_and_history
+
+# Retained IT Helpdesk tools for reference/backward compatibility
 from .check_service_status.tool import check_service_status
 from .create_ticket.tool import create_ticket
 from .format_incident_report.tool import format_incident_report
@@ -16,12 +30,20 @@ from .search_kb.tool import search_kb
 from .search_device_info.tool import search_device_info
 
 
-# These names are part of the fixed evaluation contract. Keep built-in names
-# unchanged in tools.yaml, this registry and the supplied datasets. Improve
-# descriptions and compatible schemas. Register any team-built bonus tool in
-# this registry and tools.yaml, then test it with team-authored cases.
 TOOL_FUNCTIONS = {
+    # DealHunter tools (Primary Domain)
     "clarify": ask_user,
+    "query_platform_price": query_platform_price,
+    "compare_multi_platform_prices": compare_multi_platform_prices,
+    "search_product_catalog": search_product_catalog,
+    "lookup_user_profile": lookup_user_profile,
+    "format_price_comparison": format_price_comparison,
+    "platform_policy": search_platform_policy,
+    "set_price_alert": set_price_alert,
+    "search_external_market_price": search_external_market_price,
+    "detect_fake_discount_and_history": detect_fake_discount_and_history,
+
+    # Reference IT Helpdesk tools
     "search_kb": search_kb,
     "search_device_info": search_device_info,
     "check_service_status": check_service_status,

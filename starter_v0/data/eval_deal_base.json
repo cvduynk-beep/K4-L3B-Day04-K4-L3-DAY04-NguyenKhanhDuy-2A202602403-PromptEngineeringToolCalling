@@ -1,0 +1,270 @@
+{
+  "dataset_id": "day04_deal_base",
+  "dataset_role": "base",
+  "description": "Fixed core evaluation for DealHunter AI Assistant. Includes 20 single-turn cases and 10 multi-turn cases.",
+  "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
+  "cases": [
+    {
+      "id": "D01_platform_price_routing", "phase": "B", "suite": "base",
+      "query": "Giá iPhone 15 Pro trên Shopee hiện tại là bao nhiêu?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "query_platform_price", "args": {"platform": "shopee", "product_name": "iPhone 15 Pro"}}]},
+      "metadata": {"skill": "route_single_platform", "difficulty": "easy", "what_it_tests": "Tra cứu giá trên một sàn cụ thể phải dùng query_platform_price."}
+    },
+    {
+      "id": "D02_multi_platform_comparison", "phase": "B", "suite": "base",
+      "query": "So sánh giá MacBook Air M3 trên các sàn và cho mình biết nơi nào bán rẻ nhất.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "compare_multi_platform_prices", "args": {"product_name": "MacBook Air M3"}}]},
+      "metadata": {"skill": "route_multi_platform_comparison", "difficulty": "easy", "what_it_tests": "Tìm giá rẻ nhất hoặc so sánh đa sàn dùng compare_multi_platform_prices."}
+    },
+    {
+      "id": "D03_catalog_specs_routing", "phase": "B", "suite": "base",
+      "query": "Tìm thông số kỹ thuật và độ phân giải của màn hình Dell UltraSharp U2723QE.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "search_product_catalog", "args": {"query": "Dell UltraSharp U2723QE", "category": "monitor"}}]},
+      "metadata": {"skill": "route_catalog", "difficulty": "medium", "what_it_tests": "Yêu cầu thông số kỹ thuật dùng search_product_catalog."}
+    },
+    {
+      "id": "D04_user_profile_routing", "phase": "B", "suite": "base",
+      "query": "Tra cứu thông tin tài khoản khách hàng USER-101 và các voucher hiện có.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "lookup_user_profile", "args": {"user_id": "USER-101"}}]},
+      "metadata": {"skill": "route_user_profile", "difficulty": "easy", "what_it_tests": "Mã khách hàng phải đi vào lookup_user_profile."}
+    },
+    {
+      "id": "D05_platform_variant_arg", "phase": "B", "suite": "base",
+      "query": "Kiểm tra giá bản iPhone 15 Pro 256GB trên Tiki.",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "query_platform_price", "args": {"platform": "tiki", "product_name": "iPhone 15 Pro", "variant": "256GB"}}]},
+      "metadata": {"skill": "extract_variant_arg", "difficulty": "medium", "what_it_tests": "Trích đúng platform=tiki và variant=256GB."}
+    },
+    {
+      "id": "D06_cellphones_routing", "phase": "B", "suite": "base",
+      "query": "Xem giá Galaxy S24 Ultra tại hệ thống CellphoneS.",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "query_platform_price", "args": {"platform": "cellphones", "product_name": "Galaxy S24 Ultra"}}]},
+      "metadata": {"skill": "cellphones_platform_arg", "difficulty": "medium", "what_it_tests": "Nhận diện đúng platform=cellphones."}
+    },
+    {
+      "id": "D07_format_ranking_report", "phase": "B", "suite": "base",
+      "query": "Trình bày các mức giá đã tìm được thành bảng xếp hạng giá từ thấp đến cao tên 'Bảng Giá iPhone 15 Pro': Shopee 23990000; Tiki 24190000; CellphoneS 24690000.",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "format_price_comparison", "args": {"template": "ranking", "comparison_title": "Bảng Giá iPhone 15 Pro"}}]},
+      "metadata": {"skill": "format_existing_prices", "difficulty": "medium", "what_it_tests": "Đã có findings thì chỉ format ranking, không gọi tool quét giá lại."}
+    },
+    {
+      "id": "D08_out_of_scope", "phase": "B", "suite": "base",
+      "query": "Hướng dẫn mình cách nấu món bún bò Huế thơm ngon chuẩn vị.",
+      "failure_type": "out_of_scope",
+      "expect": {"no_tool": true, "behavior": "refuse"},
+      "metadata": {"skill": "out_of_scope", "difficulty": "easy", "what_it_tests": "Yêu cầu ngoài săn giá TMĐT phải từ chối không gọi tool."}
+    },
+    {
+      "id": "D09_platform_policy_routing", "phase": "B", "suite": "base",
+      "query": "Tìm hiểu chính sách cam kết giá rẻ và bù tiền chênh lệch khi mua sắm.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "platform_policy", "args": {"query": "bù chênh lệch", "policy_area": "price_protection"}}]},
+      "metadata": {"skill": "route_policy", "difficulty": "medium", "what_it_tests": "Tra cứu chính sách bảo vệ giá phải gọi platform_policy."}
+    },
+    {
+      "id": "D10_external_market_price", "phase": "B", "suite": "base",
+      "query": "Tìm giá niêm yết quốc tế tham chiếu từ hãng Sony cho model WH-1000XM5.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "search_external_market_price", "args": {"manufacturer": "Sony", "model": "WH-1000XM5"}}]},
+      "metadata": {"skill": "route_external_search", "difficulty": "medium", "what_it_tests": "Giá niêm yết hãng trên web phải dùng search_external_market_price."}
+    },
+    {
+      "id": "D11_price_alert_unconfirmed", "phase": "B", "suite": "base",
+      "query": "Đặt thông báo cho tôi khi MacBook Air M3 giảm xuống dưới 23000000 VNĐ.",
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"skill": "alert_confirmation_boundary", "difficulty": "hard", "what_it_tests": "Đặt alert ghi dữ liệu phải dừng ở confirmation boundary (hỏi lại xác nhận)."}
+    },
+    {
+      "id": "D12_alert_unconfirmed_ipad", "phase": "B", "suite": "base",
+      "query": "Tạo alert giá iPad Air M2 mức 14000000.",
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"skill": "alert_needs_confirmation", "difficulty": "hard", "what_it_tests": "Chưa có confirmed=true từ người dùng thì phải hỏi xác nhận."}
+    },
+    {
+      "id": "D13_clarify_missing_variant", "phase": "B", "suite": "base",
+      "query": "Tìm giá iPad Air M2 rẻ nhất hiện nay.",
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "choice", "options": ["128GB Wi-Fi", "256GB Wi-Fi"]}}]},
+      "metadata": {"skill": "clarify_product_variant", "difficulty": "medium", "what_it_tests": "iPad có nhiều phiên bản bộ nhớ nên phải hỏi phân loại cụ thể."}
+    },
+    {
+      "id": "D14_format_detailed_report", "phase": "B", "suite": "base",
+      "query": "Trình bày chi tiết các ưu đãi của Sony WH-1000XM5 gồm giá, voucher và phí ship thành báo cáo chi tiết tên 'Báo Giá Sony XM5'.",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "format_price_comparison", "args": {"template": "detailed", "comparison_title": "Báo Giá Sony XM5"}}]},
+      "metadata": {"skill": "format_detailed_comparison", "difficulty": "medium", "what_it_tests": "Format báo cáo chi tiết dùng template detailed."}
+    },
+    {
+      "id": "D15_compare_two_platforms_parallel", "phase": "B", "suite": "base",
+      "query": "So sánh giá iPhone 15 Pro trên cả Shopee và Tiki, đừng bỏ sót sàn nào.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [
+        {"name": "query_platform_price", "args": {"platform": "shopee", "product_name": "iPhone 15 Pro"}},
+        {"name": "query_platform_price", "args": {"platform": "tiki", "product_name": "iPhone 15 Pro"}}
+      ]},
+      "metadata": {"skill": "duplicate_tool_parallel", "difficulty": "hard", "what_it_tests": "So sánh 2 sàn cụ thể phải kích hoạt 2 calls song song với args tương ứng."}
+    },
+    {
+      "id": "D16_compare_two_products", "phase": "B", "suite": "base",
+      "query": "Tìm deal giá tốt nhất cho cả tai nghe Sony WH-1000XM5 và tai nghe Apple AirPods Pro 2.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [
+        {"name": "compare_multi_platform_prices", "args": {"product_name": "Sony WH-1000XM5"}},
+        {"name": "compare_multi_platform_prices", "args": {"product_name": "Apple AirPods Pro 2"}}
+      ]},
+      "metadata": {"skill": "multiple_products_parallel", "difficulty": "hard", "what_it_tests": "Không gộp hai sản phẩm vào một lệnh; phải gọi 2 lần riêng biệt."}
+    },
+    {
+      "id": "D17_three_sources_triage", "phase": "B", "suite": "base",
+      "query": "Xem thông số Nintendo Switch OLED trong catalog, tra giá máy trên Shopee và xem chính sách đổi trả hàng.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [
+        {"name": "search_product_catalog", "args": {"query": "Nintendo Switch OLED", "category": "gaming"}},
+        {"name": "query_platform_price", "args": {"platform": "shopee", "product_name": "Nintendo Switch OLED"}},
+        {"name": "platform_policy", "args": {"query": "đổi trả", "policy_area": "return_and_refund"}}
+      ]},
+      "metadata": {"skill": "three_source_triage", "difficulty": "hard", "what_it_tests": "Một yêu cầu cần 3 nguồn dữ liệu khác nhau."}
+    },
+    {
+      "id": "D18_user_and_price_parallel", "phase": "B", "suite": "base",
+      "query": "Tra tài khoản khách hàng USER-102 và kiểm tra giá tai nghe Sony WH-1000XM5 trên sàn Tiki.",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [
+        {"name": "lookup_user_profile", "args": {"user_id": "USER-102"}},
+        {"name": "query_platform_price", "args": {"platform": "tiki", "product_name": "Sony WH-1000XM5"}}
+      ]},
+      "metadata": {"skill": "user_and_price_parallel", "difficulty": "hard", "what_it_tests": "Tra cứu user profile và kiểm tra giá là hai hành vi độc lập."}
+    },
+    {
+      "id": "D19_ambiguous_platform", "phase": "B", "suite": "base",
+      "query": "Kiểm tra giá chuột Logitech MX Master 3S trên sàn thương mại điện tử màu cam.",
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "choice", "options": ["shopee", "tiki", "lazada", "cellphones"]}}]},
+      "metadata": {"skill": "clarify_platform_choice", "difficulty": "hard", "what_it_tests": "Tên sàn mơ hồ phải hỏi lại người dùng để chọn sàn chuẩn xác."}
+    },
+    {
+      "id": "D20_format_without_refetch", "phase": "B", "suite": "base",
+      "query": "Đã có bảng giá: Dell U2723QE trên Shopee 12490000, CellphoneS 12690000. Chỉ format thành ranking report tên 'Dell U2723QE Deals'; không tìm kiếm lại.",
+      "failure_type": "unnecessary_tool",
+      "expect": {"tool_calls": [{"name": "format_price_comparison", "args": {"template": "ranking", "comparison_title": "Dell U2723QE Deals"}}]},
+      "metadata": {"skill": "format_only_boundary", "difficulty": "hard", "what_it_tests": "Tôn trọng yêu cầu 'không tìm lại'; gọi thêm tool quét giá sẽ fail."}
+    },
+    {
+      "id": "M01_clarify_variant_then_compare", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Tìm giá iPhone 15 Pro rẻ nhất."},
+        {"role": "user", "content": "Mình muốn bản 256GB."},
+        {"role": "user", "content": "So sánh giá trên tất cả các sàn giúp mình."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "compare_multi_platform_prices", "args": {"product_name": "iPhone 15 Pro", "variant": "256GB"}}]},
+      "metadata": {"skill": "multiturn_clarify_variant", "difficulty": "medium", "what_it_tests": "Kế thừa phiên bản 256GB từ lượt trước để gọi compare_multi_platform_prices."}
+    },
+    {
+      "id": "M02_profile_then_platform_check", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Tôi là khách hàng USER-101."},
+        {"role": "user", "content": "Xem giá MacBook Air M3 trên Shopee xem giá bao nhiêu."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "query_platform_price", "args": {"platform": "shopee", "product_name": "MacBook Air M3"}}]},
+      "metadata": {"skill": "multiturn_user_to_price", "difficulty": "medium", "what_it_tests": "Nhận diện lượt mới hỏi giá trên Shopee."}
+    },
+    {
+      "id": "M03_policy_to_price_comparison", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Chính sách đổi trả hàng điện tử của các sàn thế nào?"},
+        {"role": "user", "content": "Thôi mình hiểu rồi, giờ so sánh giá iPad Air M2 trên các sàn giúp mình."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "compare_multi_platform_prices", "args": {"product_name": "iPad Air M2"}}]},
+      "metadata": {"skill": "multiturn_policy_to_price", "difficulty": "medium", "what_it_tests": "Chuyển từ hỏi policy sang quét giá so sánh."}
+    },
+    {
+      "id": "M04_refine_target_price_alert", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Đặt thông báo giá cho Sony WH-1000XM5 khi dưới 6500000."},
+        {"role": "user", "content": "Đổi thành giá dưới 6000000 nhé."}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"skill": "multiturn_refine_alert_boundary", "difficulty": "hard", "what_it_tests": "Sau khi đổi mức giá vẫn phải dừng ở confirmation boundary."}
+    },
+    {
+      "id": "M05_alert_confirmation_flow", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Đặt alert giá iPhone 15 Pro mức 24000000."},
+        {"role": "user", "content": "Đổi giá thành 23500000."},
+        {"role": "user", "content": "Hãy cho mình xem lại và hỏi xác nhận trước khi lưu."}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"skill": "multiturn_alert_confirmation", "difficulty": "hard", "what_it_tests": "Yêu cầu hỏi xác nhận trước khi kích hoạt alert."}
+    },
+    {
+      "id": "M06_switch_tool_multiturn", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Kiểm tra giá Nintendo Switch trên Tiki."},
+        {"role": "user", "content": "Thôi không xem giá nữa, tìm thông số màn hình của Nintendo Switch OLED trong catalog."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "search_product_catalog", "args": {"query": "Nintendo Switch OLED", "category": "gaming"}}]},
+      "metadata": {"skill": "multiturn_switch_tool", "difficulty": "hard", "what_it_tests": "Intent mới thay tra giá bằng tra cứu catalog."}
+    },
+    {
+      "id": "M07_cancel_previous_action", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Tạo thông báo giá cho màn hình Dell U2723QE."},
+        {"role": "user", "content": "Dừng lại, không tạo thông báo nào cả."},
+        {"role": "user", "content": "Chỉ nói bạn đã hiểu yêu cầu hủy."}
+      ],
+      "failure_type": "unnecessary_tool",
+      "expect": {"no_tool": true, "behavior": "answer_without_tool"},
+      "metadata": {"skill": "multiturn_cancel_action", "difficulty": "hard", "what_it_tests": "Lệnh hủy phải thắng yêu cầu tạo alert cũ; không gọi tool."}
+    },
+    {
+      "id": "M08_correct_then_parallel", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Tra giá chuột MX Master 2S."},
+        {"role": "user", "content": "À nhầm, mã đúng là MX Master 3S."},
+        {"role": "user", "content": "Kiểm tra giá sản phẩm đó trên cả Shopee và Tiki."}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [
+        {"name": "query_platform_price", "args": {"platform": "shopee", "product_name": "MX Master 3S"}},
+        {"name": "query_platform_price", "args": {"platform": "tiki", "product_name": "MX Master 3S"}}
+      ]},
+      "metadata": {"skill": "multiturn_correction_parallel", "difficulty": "hard", "what_it_tests": "Sử dụng model đã sửa MX Master 3S và gọi 2 sàn song song."}
+    },
+    {
+      "id": "M09_confirmation_invalidated", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Tôi xác nhận đặt alert giá iPad Air M2 14 triệu."},
+        {"role": "user", "content": "Khoan, đổi thành 13.5 triệu và bản 256GB."},
+        {"role": "user", "content": "Hãy rà lại thông tin mới trước."}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"skill": "confirmation_invalidated_by_change", "difficulty": "hard", "what_it_tests": "Xác nhận cũ mất hiệu lực khi thông số sản phẩm hoặc giá thay đổi."}
+    },
+    {
+      "id": "M10_latest_intent_wins", "phase": "B", "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Kiểm tra giá Galaxy S24 Ultra trên Shopee."},
+        {"role": "user", "content": "Không cần kiểm tra giá nữa."},
+        {"role": "user", "content": "Chỉ tra cứu thông tin tài khoản USER-104."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "lookup_user_profile", "args": {"user_id": "USER-104"}}]},
+      "metadata": {"skill": "latest_intent_wins", "difficulty": "hard", "what_it_tests": "Ý định mới nhất thay thế hoàn toàn yêu cầu cũ."}
+    }
+  ]
+}
